@@ -1,0 +1,28 @@
+<settings>
+    <generator>
+            <scala>100</scala>
+            <numberOfThreads>5</numberOfThreads>
+    </generator>
+    <areaNode>
+    	<sensorType>1</sensorType>
+    	<!-- 0 = AVGSPEEDONLINK
+    	  1 = AVGSPEEDVEHICLEONLINK -->
+    	<multipleNorthBoundQueues>1</multipleNorthBoundQueues>
+    	<!-- 0 = false, 1 = true -->
+    	<urlIn>tcp://localhost:61616</urlIn>
+    	
+    	<urlOut>tcp://172.18.10.145:30040</urlOut>
+   
+    </areaNode>
+    <Link>
+    	<intervallo>3</intervallo>
+        <!-- in minuti -->
+    	<startTime>06/09/2018 00:00:00</startTime>
+    	<msgType>3</msgType>
+    	<!-- 0 = false, 1 = true -->
+    </Link>
+    <Files>
+    	<links>Links.csv</links>
+    	<observations>ObservationTimestamp.csv</observations>
+    </Files>
+</settings>
