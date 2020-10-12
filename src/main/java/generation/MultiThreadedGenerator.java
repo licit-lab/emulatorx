@@ -19,7 +19,7 @@ import static generation.GeneratorUtils.*;
 /**
  * La classe GeneratorThread.java ha il compito di associare il link alla giusta area e di inviare
  * i sample al corretto nodo area in base al link specificato nel sample. Per l'associazione
- * tra link ed area si sfruttano le informazioni presenti all'interno del file "Links.csv" o di un suo sottoinsieme mentre il 
+ * tra link ed area si sfruttano le informazioni presenti all'interno del file "all_links.csv" o di un suo sottoinsieme mentre il
  * file contenete i samples � "Observation.csv" o di un suo sottoinsieme.
  * @author De Luca Lucio, Grimaldi Gaia, Tedesco Francesco
  *
