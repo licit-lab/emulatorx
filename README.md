@@ -30,4 +30,6 @@ Each _record_ has the following fields:
 - *timestamp*, dd/mm/yyyy hh:mm:ss, average speed computing timestamp 
 - *speed*, float, average speed in km/h
 
+#How it works
+
 *Initialization* instantiates AreaNode and for each of them, it assigns the respective links.
