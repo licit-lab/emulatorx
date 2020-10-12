@@ -23,29 +23,11 @@ public class Link {
 	private int intervallo;
 	private double totalSampleSpeeds;
 	private int numVehicles;
-	private int msgType;
 	private LocalDateTime startingDate, finalDate;
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 	private static final double FACTOR_M2KM = 0.001;
-
-	public Link() {
-		intervallo = 3;				
-		totalSampleSpeeds = 0;
-		numVehicles = 0;
-		setIntervalBounds("06/09/2018 00:00:00");
-		totalTravelTimes = 0;
-		msgType=-1;
-	}
-
-	public Link(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow,
-				String routenumber,
-				String areaname, String name, String geom, int msgType) {
-
-		this(id, length,  ffs,  speedlimit,  frc,  netclass,  fow,  routenumber,
-				areaname,  name, geom, 3, "06/09/2018 00:00:00",msgType);
-	}
-
+	private static final double FACTORH_2SEC = 3600;
 
 	public Link(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
                 String areaname, String name, String geom, int intervallo, String startingDate, int msgType) {
@@ -61,7 +43,6 @@ public class Link {
 		this.name = name;
 		setGeomFromString(geom);
 		this.intervallo = intervallo;
-		this.msgType= msgType;
 		totalSampleSpeeds = 0;
 		numVehicles = 0;
 		setIntervalBounds(startingDate);
@@ -103,9 +84,8 @@ public class Link {
 		return totalVehiclesTravelTime;
 	}
 
-	//TODO da passare in secondi
 	public double computeSingleVehicleTravelTime (float sampleSpeed, float coverage) {
-		return coverage*length*FACTOR_M2KM/sampleSpeed;
+		return (coverage*length*FACTOR_M2KM/sampleSpeed)*FACTORH_2SEC;
 	}
 
 	//converte le ore trascorse in un oggetto date in una stringa
@@ -133,7 +113,7 @@ public class Link {
 		return linkId;
 	}
 
-	public String generateCompleteJsonBody(double avgSpeed, double avgTravelTime, String timestamp) {
+	/*public String generateCompleteJsonBody(double avgSpeed, double avgTravelTime, String timestamp) {
 		CompleteMessagge cm = new CompleteMessagge(linkId, length,ffs,speedlimit,frc,netclass,fow,routenumber,
 				areaname,name,Arrays.deepToString(geom),timestamp,avgSpeed,convertHoursInStringDate(avgTravelTime));
 		return new Gson().toJson(cm);
@@ -144,7 +124,7 @@ public class Link {
 		return new Gson().toJson(sm);
 	}
 
-	/*public String generateMessageAvgTravelTime(double avgTravelTime , String timestamp) throws ParseException
+	*//*public String generateMessageAvgTravelTime(double avgTravelTime , String timestamp) throws ParseException
 	{
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 

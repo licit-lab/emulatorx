@@ -29,8 +29,6 @@ public class Initialization {
 		AVGSPEEDVEHICLEONLINK
 	}
 
-	private static String linkFilePath="Links.csv";
-
 	private static final Logger log = LoggerFactory.getLogger(Initialization.class);
 
 	public static void main(String[] args) {
@@ -63,11 +61,11 @@ public class Initialization {
 		value = st.readElementFromFileXml("settings.xml", "Link", "msgType");
 		int msgType = Integer.parseInt(value);
 		log.info("Message type is set at: " + msgType);
-		
-		linkFilePath = st.readElementFromFileXml("settings.xml", "Files", "links");
+
+		String linkFilePath = st.readElementFromFileXml("settings.xml", "Files", "links");
 		log.info("Links file path is: " + linkFilePath);
 		
-		HashMap<String, AreaNode> areas = new HashMap<>();
+		HashMap<String, AreaNode> areas = new HashMap<>(); //It maintains associations between links and areas
 
 		Reader reader;
 		try {
@@ -85,10 +83,14 @@ public class Initialization {
 				if(areas.containsKey(r.get("areaname")))
 					areas.get(r.get("areaname")).addLink(link);
 				else {
-					if (sensorType == SensorType.AVGSPEEDONLINK)
-						an = new AvgSpeedAreaNode(urlIn, urlOut, r.get("areaname"), link, boolMultipleNorthBoundQueues);
-					else if (sensorType == SensorType.AVGSPEEDVEHICLEONLINK)
-						an = new AvgSpeedVehicleAreaNode(urlIn, urlOut, r.get("areaname"), link, boolMultipleNorthBoundQueues);
+					if (sensorType == SensorType.AVGSPEEDONLINK){
+						an = new AvgSpeedAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+						an.addLink(link);
+					}
+					else if (sensorType == SensorType.AVGSPEEDVEHICLEONLINK){
+						an = new AvgSpeedVehicleAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+						an.addLink(link);
+					}
 					areas.put(r.get("areaname"), an);
 				}
 			}

@@ -16,15 +16,7 @@ import static generation.GeneratorUtils.*;
 
 //TODO Complete multi-threaded version of Generator
 
-/**
- * La classe GeneratorThread.java ha il compito di associare il link alla giusta area e di inviare
- * i sample al corretto nodo area in base al link specificato nel sample. Per l'associazione
- * tra link ed area si sfruttano le informazioni presenti all'interno del file "all_links.csv" o di un suo sottoinsieme mentre il
- * file contenete i samples � "Observation.csv" o di un suo sottoinsieme.
- * @author De Luca Lucio, Grimaldi Gaia, Tedesco Francesco
- *
- */
-public class GeneratorThread extends Thread {
+public class MultiThreadedGenerator extends Thread {
 	private static int scala=10;
 	private String url;
 	private static HashMap<String, String> associations=new HashMap<>();
@@ -32,7 +24,7 @@ public class GeneratorThread extends Thread {
 	private String obsFilePath;
 	private static final Logger log = LoggerFactory.getLogger(Generator.class);
 
-	public GeneratorThread(String linkFile, String obsFile) {
+	public MultiThreadedGenerator(String linkFile, String obsFile) {
 		this.linkFilePath=linkFile;
 		this.obsFilePath=obsFile;
 	}
@@ -91,9 +83,9 @@ public class GeneratorThread extends Thread {
 		String value = st.readElementFromFileXml("settings.xml", "generator", "numberOfThreads");
 		int threads = Integer.parseInt(value);
 		System.out.println("threads = " + threads);
-		GeneratorThread[] generators = new GeneratorThread[threads];
+		MultiThreadedGenerator[] generators = new MultiThreadedGenerator[threads];
 		for(int i = 0; i < threads; i++)
-			generators[i] = new GeneratorThread("links/"+i+".csv","obs/"+i+".csv");
+			generators[i] = new MultiThreadedGenerator("links/"+i+".csv","obs/"+i+".csv");
 		for(int i = 0; i < threads; i++)
 			generators[i].start();
 	}

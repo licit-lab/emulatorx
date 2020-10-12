@@ -10,13 +10,8 @@ import java.util.HashMap;
 public class AvgSpeedAreaNode extends AreaNode {
 	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
 
-	public AvgSpeedAreaNode(String urlIn, String urlOut, String areaName, HashMap<Long, Link> links, boolean multipleQueues) {
-		super(urlIn, urlOut, areaName, links, multipleQueues);
-	}
-
-	public AvgSpeedAreaNode(String urlIn, String urlOut, String areaName, Link link, boolean multipleQueues) {
-		super(urlIn, urlOut, areaName, link, multipleQueues);
-
+	public AvgSpeedAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
+		super(urlIn, urlOut, areaName, multipleQueues);
 	}
 
 	@Override

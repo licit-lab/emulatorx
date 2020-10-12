@@ -14,40 +14,25 @@ import java.util.HashMap;
 public abstract class AreaNode {
 
 	private String areaName;
-	private HashMap<Long, Link> links= new HashMap<>();
+	private HashMap<Long, Link> links= new HashMap<>(); //It maintains the links for each area, the link ID is used as the key
 	private ClientConsumer consumer;
-	private ClientSession sessionIn;
 	private ClientSession sessionOut;
 	private ClientProducer producer;
-	private AreaNode myInstance = this;
-	private MessageHandler myHandler;
+	private MessageHandler handler;
 	private boolean multipleNorthBoundQueues;
 	private String urlIn;
 	private String urlOut;
 	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
 	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-	private final String NORTHBOUND_SUFFIX = "-NorthBound";
-
-	public AreaNode(String urlIn, String urlOut, String areaName, HashMap<Long, Link> links, boolean multipleQueues) {
-		this(urlIn, urlOut,areaName, multipleQueues);
-		this.setLinks(links);
-	}
-
-	public AreaNode(String urlIn, String urlOut, String areaName, Link link, boolean multipleQueues) {
-		this(urlIn, urlOut,areaName, multipleQueues);
-		getLinks().put(link.getId(),link);
-	}
-
-	private AreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
+	public AreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
 		this.areaName = areaName;
-		this.urlIn=urlIn;
-		this.urlOut=urlOut;
-		multipleNorthBoundQueues=multipleQueues;
+		this.urlIn = urlIn;
+		this.urlOut = urlOut;
+		multipleNorthBoundQueues = multipleQueues;
 		createConnections();
-		setMyHandler(createMessageHandler());
+		setHandler(createMessageHandler());
 		setQueueListener();
-
 	}
 
 	public void addLink(Link l) {
@@ -58,25 +43,17 @@ public abstract class AreaNode {
 		return links;
 	}
 
-	public void setLinks(HashMap<Long, Link> links) {
-		this.links = links;
-	}
-
-	public AreaNode getAreaNodeInstance() {
-		return myInstance;
-	}
-
-	private void setMyHandler(MessageHandler myHandler) {
-		this.myHandler = myHandler;
+	private void setHandler(MessageHandler handler) {
+		this.handler = handler;
 	}
 
 	private void createConnections() {
 		ClientSessionFactory factoryIn;
 		ClientSessionFactory factoryOut;
 		try {
-			ServerLocator locatorIn = ActiveMQClient.createServerLocator("tcp://localhost:61616");
+			ServerLocator locatorIn = ActiveMQClient.createServerLocator(urlIn);
 			factoryIn = locatorIn.createSessionFactory();
-			sessionIn = factoryIn.createSession(true,true);
+			ClientSession sessionIn = factoryIn.createSession(true, true);
 			sessionIn.createQueue(new SimpleString(areaName), RoutingType.ANYCAST, new SimpleString(areaName), true);
 			consumer = sessionIn.createConsumer(areaName);
 			sessionIn.start();
@@ -87,6 +64,7 @@ public abstract class AreaNode {
 			sessionOut.start();
 
 			if(multipleNorthBoundQueues) {
+				String NORTHBOUND_SUFFIX = "-NorthBound";
 				sessionOut.createQueue(new SimpleString(areaName + NORTHBOUND_SUFFIX), RoutingType.ANYCAST, new SimpleString(areaName + NORTHBOUND_SUFFIX), true);
 				producer = sessionOut.createProducer(new SimpleString(areaName + NORTHBOUND_SUFFIX));
 			} else {
@@ -97,38 +75,8 @@ public abstract class AreaNode {
 			e.printStackTrace();
 		}
     }
-	
-	public void sendMessage(String messageBody, long linkId, String timestamp, double speed, String travelTime){
-		ClientMessage msg;
-		try {
-			msg = sessionOut.createMessage(true);
-			msg.putLongProperty("link", linkId);
-			msg.putStringProperty("interval", timestamp);
-			msg.putDoubleProperty("avgSpeed", speed);
-			msg.putStringProperty("travelTime", travelTime);
-			log.info(messageBody);
-			msg.getBodyBuffer().writeString(messageBody);
-			producer.send(msg);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-
-	public void sendMessageTT(long linkId, String messageBody){
-		ClientMessage msg;
-		try {
-			msg = sessionOut.createMessage(true);
-			msg.putLongProperty("link", linkId);
-			msg.getBodyBuffer().writeString(messageBody);
-			producer.send(msg);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void sendMessageTT(String messageBody, long linkId, String timestamp, String traveltime){
+	public void sendMessage(long linkId, String messageBody){
 		ClientMessage msg;
 		try {
 			msg = sessionOut.createMessage(true);
@@ -142,7 +90,7 @@ public abstract class AreaNode {
 
 	private void setQueueListener() {
 		try {
-			consumer.setMessageHandler(myHandler);
+			consumer.setMessageHandler(handler);
 		} catch (ActiveMQException e) {
 			e.printStackTrace();
 		}

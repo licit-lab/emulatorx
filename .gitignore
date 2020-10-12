@@ -1,3 +1,7 @@
 *.csv
 target/*
 .idea/*
+all_links.csv
+lentilly_links.csv
+lentilly_observations.csv
+00h01h_observations.csv

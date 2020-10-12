@@ -11,7 +11,7 @@
     	<!-- 0 = false, 1 = true -->
     	<urlIn>tcp://localhost:61616</urlIn>
     	
-    	<urlOut>tcp://172.18.10.145:30040</urlOut>
+    	<urlOut>tcp://137.121.170.248:30340</urlOut>
    
     </areaNode>
     <Link>
@@ -22,7 +22,7 @@
     	<!-- 0 = false, 1 = true -->
     </Link>
     <Files>
-    	<links>Links.csv</links>
-    	<observations>ObservationTimestamp.csv</observations>
+    	<links>all_links.csv</links>
+    	<observations>00h01h_observations.csv</observations>
     </Files>
 </settings>

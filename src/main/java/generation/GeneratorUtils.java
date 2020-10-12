@@ -39,20 +39,43 @@ public class GeneratorUtils {
         return millisDiff/scala;
     }
 
+    static void associate(ClientSession session, String linkFilePath, HashMap<String, String> associations) {
+        Reader reader;
+        try {
+            reader = Files.newBufferedReader(Paths.get(linkFilePath));
+            CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
+            CSVParser csvParser = csvFormat.parse(reader);
+            for (CSVRecord r: csvParser) {
+                associations.put(r.get("id"),r.get("areaname"));
+                log.info("Link {} will be associated to {}", r.get("id"),r.get("areaname"));
+                try{
+                    ClientSession.QueueQuery qq = session.queueQuery(new SimpleString(r.get("areaname")));
+                    if(!qq.isExists())
+                        session.createQueue(new SimpleString(r.get("areaname")), RoutingType.ANYCAST, new SimpleString(r.get("areaname")), true);
+                } catch (ActiveMQException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     static void createAndSend(ClientSession session, String obsFilePath, int scala, HashMap<String, String> associations) throws InterruptedException {
         String previousTmp = null;
         String currentTmp;
         Reader reader;
         try {
             reader = Files.newBufferedReader(Paths.get(obsFilePath));
-            CSVFormat csvFormat = CSVFormat.DEFAULT.withDelimiter(';');
+            CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
             CSVParser csvParser = csvFormat.parse(reader);
             for (CSVRecord r: csvParser){
                 currentTmp=r.get(3);
                 if(r.getRecordNumber() == 1)
                     previousTmp = currentTmp;
                 long millisDiff = timestampsDifference(previousTmp, currentTmp, scala);
-                Thread.sleep(millisDiff);
+                log.info("Waiting {} ms before sending next sample",millisDiff);
+                Thread.sleep(millisDiff); //Wait for a given scaled interval between two samples
                 previousTmp = currentTmp;
                 SimpleString queue = new SimpleString(associations.get(r.get(1)));
                 ClientProducer producer;
@@ -64,28 +87,8 @@ public class GeneratorUtils {
                     message.putStringProperty("timestamp", r.get(3));
                     message.putFloatProperty("speed", Float.parseFloat(r.get(4)));
                     message.getBodyBuffer().writeString(r.toString());
+                    log.info("Sending message {}",message.toString());
                     producer.send(message);
-                } catch (ActiveMQException e) {
-                    e.printStackTrace();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static void associate(ClientSession session, String linkFilePath, HashMap<String, String> associations) {
-        Reader reader;
-        try {
-            reader = Files.newBufferedReader(Paths.get(linkFilePath));
-            CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
-            CSVParser csvParser = csvFormat.parse(reader);
-            for (CSVRecord r: csvParser) {
-                associations.put(r.get("id"),r.get("areaname"));
-                try{
-                    ClientSession.QueueQuery qq = session.queueQuery(new SimpleString(r.get("areaname")));
-                    if(!qq.isExists())
-                        session.createQueue(new SimpleString(r.get("areaname")), RoutingType.ANYCAST, new SimpleString(r.get("areaname")), true);
                 } catch (ActiveMQException e) {
                     e.printStackTrace();
                 }
