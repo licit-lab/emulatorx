@@ -18,7 +18,7 @@ public class Link {
 	private float length;
 	private int ffs,speedlimit,frc,netclass,fow;
 	private String routenumber,areaname,name;
-	private double totalTravelTimes;
+	private double totalTravelTime;
 	private float[][] geom;
 	private int intervallo;
 	private double totalSampleSpeeds;
@@ -46,7 +46,7 @@ public class Link {
 		totalSampleSpeeds = 0;
 		numVehicles = 0;
 		setIntervalBounds(startingDate);
-		totalTravelTimes = 0;
+		totalTravelTime = 0;
 	}
 
 	private void setIntervalBounds(String startingDate) {
@@ -67,10 +67,10 @@ public class Link {
 	public String computeTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) {
 		String totalVehiclesTravelTime = null;
 		if(receivedDate.isAfter(finalDate)){
-			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimePayload(getId(),totalTravelTimes,numVehicles,startingDate,finalDate);
+			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimePayload(getId(),totalTravelTime,numVehicles,startingDate,finalDate);
 			totalSampleSpeeds = 0;
 			numVehicles = 0;
-			totalTravelTimes = 0;
+			totalTravelTime = 0;
 			Duration duration =  Duration.between(receivedDate,finalDate);
 			long diff = Math.abs(duration.toMinutes());
 			int mul = (int) (diff/intervallo);
@@ -80,7 +80,7 @@ public class Link {
 		}
 		numVehicles++;
 		totalSampleSpeeds = totalSampleSpeeds + sampleSpeed;
-		totalTravelTimes = totalTravelTimes + ((coverage*length*FACTOR_M2KM)/sampleSpeed);
+		totalTravelTime = totalTravelTime + ((coverage*length*FACTOR_M2KM)/sampleSpeed);
 		return totalVehiclesTravelTime;
 	}
 

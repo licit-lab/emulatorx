@@ -22,7 +22,7 @@
     	<!-- 0 = false, 1 = true -->
     </Link>
     <Files>
-    	<links>all_links.csv</links>
+    	<links>some_links.csv</links>
     	<observations>00h01h_observations.csv</observations>
     </Files>
 </settings>

@@ -6,10 +6,10 @@ import org.apache.activemq.artemis.api.core.client.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AvgSpeedVehicleAreaNode extends AreaNode {
+public class TotalTravelTimeAreaNode extends AreaNode {
 	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
 
-	public AvgSpeedVehicleAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
+	public TotalTravelTimeAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
 		super(urlIn, urlOut,areaName, multipleQueues);
 	}
 	

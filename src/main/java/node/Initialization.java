@@ -22,25 +22,25 @@ import org.slf4j.LoggerFactory;
  * dei singoli link. Da questi si recuperano il numero di aree e di conseguenza si instanziano i diversi AreaNode, contestualmente vengono generati
  * tutti i link.
  */
-public class Initialization {
+public class Initialization extends Thread{
 
 	private enum SensorType {
-		AVGSPEEDONLINK,
-		AVGSPEEDVEHICLEONLINK
+		SINGLETRAVELTIME,
+		TOTALTRAVELTIME
 	}
 
 	private static final Logger log = LoggerFactory.getLogger(Initialization.class);
 
-	public static void main(String[] args) {
+	public void run(){
 		BasicConfigurator.configure();
 		SensorType sensorType;
 		SettingReader st = new SettingReader();
 		String value = st.readElementFromFileXml("settings.xml", "areaNode", "sensorType");
 		System.out.println(value);
 		if (Integer.parseInt(value) == 0 )
-			sensorType = SensorType.AVGSPEEDONLINK;
+			sensorType = SensorType.SINGLETRAVELTIME;
 		else
-			sensorType = SensorType.AVGSPEEDVEHICLEONLINK;
+			sensorType = SensorType.TOTALTRAVELTIME;
 		log.info("Sensor type is: " + sensorType);
 
 		boolean boolMultipleNorthBoundQueues;
@@ -52,7 +52,7 @@ public class Initialization {
 		String urlOut = st.readElementFromFileXml("settings.xml", "areaNode", "urlOut");
 		log.info("Broker in: " + urlIn);
 		log.info("Broker out: " + urlOut);
-		
+
 		String interval = st.readElementFromFileXml("settings.xml", "Link", "intervallo");
 		String startTime = st.readElementFromFileXml("settings.xml", "Link", "startTime");
 		log.info("Interval is set at: " + interval);
@@ -64,7 +64,7 @@ public class Initialization {
 
 		String linkFilePath = st.readElementFromFileXml("settings.xml", "Files", "links");
 		log.info("Links file path is: " + linkFilePath);
-		
+
 		HashMap<String, AreaNode> areas = new HashMap<>(); //It maintains associations between links and areas
 
 		Reader reader;
@@ -83,12 +83,12 @@ public class Initialization {
 				if(areas.containsKey(r.get("areaname")))
 					areas.get(r.get("areaname")).addLink(link);
 				else {
-					if (sensorType == SensorType.AVGSPEEDONLINK){
-						an = new AvgSpeedAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+					if (sensorType == SensorType.SINGLETRAVELTIME){
+						an = new SingleTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
 						an.addLink(link);
 					}
-					else if (sensorType == SensorType.AVGSPEEDVEHICLEONLINK){
-						an = new AvgSpeedVehicleAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+					else if (sensorType == SensorType.TOTALTRAVELTIME){
+						an = new TotalTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
 						an.addLink(link);
 					}
 					areas.put(r.get("areaname"), an);
@@ -97,9 +97,17 @@ public class Initialization {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
 
-		log.info("Initialization completed...");
-		//utilizzo un busy waiting per tenere attive le varie istanze di AreaNode create
-		while (true) { }
+	public static void main(String[] args) {
+		Initialization i = new Initialization();
+		i.start();
+
+		try
+		{
+			i.wait();
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 }
