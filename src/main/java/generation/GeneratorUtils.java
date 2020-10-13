@@ -82,7 +82,7 @@ public class GeneratorUtils {
                 try {
                     producer = session.createProducer(queue);
                     ClientMessage message = session.createMessage(true);
-                    message.putLongProperty("link", Long.parseLong(r.get(1)));
+                    message.putLongProperty("linkid", Long.parseLong(r.get(1)));
                     message.putFloatProperty("coverage", Float.parseFloat(r.get(2).replace(',','.')));
                     message.putStringProperty("timestamp", r.get(3));
                     message.putFloatProperty("speed", Float.parseFloat(r.get(4)));

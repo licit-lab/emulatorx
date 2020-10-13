@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * dei singoli link. Da questi si recuperano il numero di aree e di conseguenza si instanziano i diversi AreaNode, contestualmente vengono generati
  * tutti i link.
  */
-public class Initialization extends Thread{
+public class Initialization{
 
 	private enum SensorType {
 		SINGLETRAVELTIME,
@@ -31,7 +31,7 @@ public class Initialization extends Thread{
 
 	private static final Logger log = LoggerFactory.getLogger(Initialization.class);
 
-	public void run(){
+	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		SensorType sensorType;
 		SettingReader st = new SettingReader();
@@ -79,7 +79,7 @@ public class Initialization extends Thread{
 						Integer.parseInt(r.get("netclass")), Integer.parseInt(r.get("fow")),
 						r.get("routenumber"),r.get("areaname"),r.get("name"),r.get("geom"),
 						Integer.parseInt(interval),
-						startTime,msgType);
+						startTime);
 				if(areas.containsKey(r.get("areaname")))
 					areas.get(r.get("areaname")).addLink(link);
 				else {
@@ -97,17 +97,8 @@ public class Initialization extends Thread{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+		while(true){
 
-	public static void main(String[] args) {
-		Initialization i = new Initialization();
-		i.start();
-
-		try
-		{
-			i.wait();
-		}catch(Exception e) {
-			System.out.println(e);
 		}
 	}
 }

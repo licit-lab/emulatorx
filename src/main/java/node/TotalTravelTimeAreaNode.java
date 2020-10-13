@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 
-public class SingleTravelTimeAreaNode extends AreaNode {
+public class TotalTravelTimeAreaNode extends AreaNode {
 	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
 
-	public SingleTravelTimeAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
+	public TotalTravelTimeAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
 		super(urlIn, urlOut, areaName, multipleQueues);
 	}
 
@@ -17,12 +17,18 @@ public class SingleTravelTimeAreaNode extends AreaNode {
 	protected MessageHandler createMessageHandler() {
 		return msg -> {
 			try {
-				long linkValue = msg.getLongProperty("linkid");
-				Link link = getLinks().get(linkValue);
-				String totalVehiclesTravelTime = link.computeTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timeStamp"),formatter),
+				log.info("A new speed reading is about to be processed... ");
+				long linkProperty = msg.getLongProperty("linkid");
+				log.info("The link is the following {}", linkProperty);
+				Link link = getLinks().get(linkProperty);
+				log.info("The speed reading refers to link {}", linkProperty);
+				//Computing total travel times
+				String totalVehiclesTravelTime = link.computeTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
 						msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
 				if(totalVehiclesTravelTime != null){
-					super.sendMessage(linkValue,totalVehiclesTravelTime);
+					log.info("The northbound message payload will be {}", totalVehiclesTravelTime);
+					super.sendMessage(linkProperty,totalVehiclesTravelTime);
+					log.info("Message has been sent.");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

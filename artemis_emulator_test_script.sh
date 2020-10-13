@@ -2,7 +2,7 @@
 
 export TILLER_NAMESPACE=promenade
 
-cd ~/Desktop/Promenade/helm-charts/activemq-artemis/activemq-artemis
+cd ~/Desktop/Promenade/helm-charts/activemq-artemis/activemq-artemis || exit
 
 helm del --purge artemis
 
@@ -10,7 +10,7 @@ oc delete pvc data-artemis-activemq-artemis-master-0
 
 helm install --name artemis .
 
-cd ~/Desktop/Promenade/broker/
+cd ~/Desktop/Promenade/broker/ || exit
 
 rm -rf mybroker
 

@@ -5,8 +5,8 @@
     </generator>
     <areaNode>
     	<sensorType>1</sensorType>
-    	<!-- 0 = AVGSPEEDONLINK
-    	  1 = AVGSPEEDVEHICLEONLINK -->
+    	<!-- 0 = SINGLETRAVELTIME
+    	  1 = TOTALTRAVELTIME -->
     	<multipleNorthBoundQueues>1</multipleNorthBoundQueues>
     	<!-- 0 = false, 1 = true -->
     	<urlIn>tcp://localhost:61616</urlIn>
@@ -22,7 +22,7 @@
     	<!-- 0 = false, 1 = true -->
     </Link>
     <Files>
-    	<links>some_links.csv</links>
-    	<observations>00h01h_observations.csv</observations>
+    	<links>lentilly_links.csv</links>
+    	<observations>lentilly_observations.csv</observations>
     </Files>
 </settings>

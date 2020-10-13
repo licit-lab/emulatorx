@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import data.model.CompleteMessagge;
 import data.model.SyntheticMessage;
 import data.util.PacketGenerator;
+import node.AreaNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,8 +32,10 @@ public class Link {
 	private static final double FACTOR_M2KM = 0.001;
 	private static final double FACTORH_2SEC = 3600;
 
+	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
+
 	public Link(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
-                String areaname, String name, String geom, int intervallo, String startingDate, int msgType) {
+				String areaname, String name, String geom, int intervallo, String startingDate) {
 		this.linkId = id;
 		this.length = length;
 		this.ffs = ffs;
@@ -49,6 +54,9 @@ public class Link {
 		totalTravelTime = 0;
 	}
 
+	/*
+	Set the interval for computing average
+	 */
 	private void setIntervalBounds(String startingDate) {
 		this.startingDate = LocalDateTime.parse(startingDate,formatter);
 		this.finalDate = this.startingDate.plusMinutes(intervallo);
@@ -67,20 +75,23 @@ public class Link {
 	public String computeTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) {
 		String totalVehiclesTravelTime = null;
 		if(receivedDate.isAfter(finalDate)){
+			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
 			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimePayload(getId(),totalTravelTime,numVehicles,startingDate,finalDate);
 			totalSampleSpeeds = 0;
 			numVehicles = 0;
 			totalTravelTime = 0;
 			Duration duration =  Duration.between(receivedDate,finalDate);
+			log.info("Difference between final date and received date for the current interval {} mins", duration.toMinutes());
 			long diff = Math.abs(duration.toMinutes());
 			int mul = (int) (diff/intervallo);
+			log.info("The multiplier is {}", mul);
 			mul++;
 			this.finalDate = finalDate.plusMinutes(mul*intervallo);
 			this.startingDate = finalDate.minusMinutes(intervallo);
 		}
 		numVehicles++;
 		totalSampleSpeeds = totalSampleSpeeds + sampleSpeed;
-		totalTravelTime = totalTravelTime + ((coverage*length*FACTOR_M2KM)/sampleSpeed);
+		totalTravelTime = totalTravelTime + ((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC;
 		return totalVehiclesTravelTime;
 	}
 
