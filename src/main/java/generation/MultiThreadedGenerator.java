@@ -85,7 +85,7 @@ public class MultiThreadedGenerator extends Thread {
 		System.out.println("threads = " + threads);
 		MultiThreadedGenerator[] generators = new MultiThreadedGenerator[threads];
 		for(int i = 0; i < threads; i++)
-			generators[i] = new MultiThreadedGenerator("links/"+i+".csv","obs/"+i+".csv");
+			generators[i] = new MultiThreadedGenerator("links.csv","obs/"+i+".csv");
 		for(int i = 0; i < threads; i++)
 			generators[i].start();
 	}

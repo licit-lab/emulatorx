@@ -22,7 +22,7 @@
     	<!-- 0 = false, 1 = true -->
     </Link>
     <Files>
-    	<links>lentilly_links.csv</links>
-    	<observations>lentilly_observations.csv</observations>
+    	<links>links_test.csv</links>
+    	<observations>obs_test.csv</observations>
     </Files>
 </settings>

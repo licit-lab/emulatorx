@@ -59,7 +59,9 @@ public class Link {
 	 */
 	private void setIntervalBounds(String startingDate) {
 		this.startingDate = LocalDateTime.parse(startingDate,formatter);
+		log.info("Starting date is {}", this.startingDate.toString());
 		this.finalDate = this.startingDate.plusMinutes(intervallo);
+		log.info("Ending date is {}", this.finalDate.toString());
 	}
 
 	private void setGeomFromString(String s) {
@@ -76,21 +78,29 @@ public class Link {
 		String totalVehiclesTravelTime = null;
 		if(receivedDate.isAfter(finalDate)){
 			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
+			log.info("Number of vehicles transited is {}", numVehicles);
+			log.info("Total travel time amounts to {}", totalTravelTime);
 			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimePayload(getId(),totalTravelTime,numVehicles,startingDate,finalDate);
 			totalSampleSpeeds = 0;
 			numVehicles = 0;
 			totalTravelTime = 0;
-			Duration duration =  Duration.between(receivedDate,finalDate);
+			/*Duration duration =  Duration.between(receivedDate,finalDate);
 			log.info("Difference between final date and received date for the current interval {} mins", duration.toMinutes());
 			long diff = Math.abs(duration.toMinutes());
 			int mul = (int) (diff/intervallo);
 			log.info("The multiplier is {}", mul);
 			mul++;
 			this.finalDate = finalDate.plusMinutes(mul*intervallo);
-			this.startingDate = finalDate.minusMinutes(intervallo);
+			this.startingDate = finalDate.minusMinutes(intervallo);*/
+			this.startingDate = receivedDate;
+			this.finalDate = receivedDate.plusMinutes(intervallo);
+			log.info("New starting date is {}", startingDate.toString());
+			log.info("New final date is {}", finalDate.toString());
 		}
 		numVehicles++;
 		totalSampleSpeeds = totalSampleSpeeds + sampleSpeed;
+		//Length is converted into km and subsequent travel time in seconds
+		//When coverage is zero, the observation is still processed but has no effect
 		totalTravelTime = totalTravelTime + ((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC;
 		return totalVehiclesTravelTime;
 	}
