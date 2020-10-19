@@ -6,7 +6,8 @@
     <areaNode>
     	<sensorType>1</sensorType>
     	<!-- 0 = SINGLETRAVELTIME
-    	  1 = TOTALTRAVELTIME -->
+    	  1 = TOTALTRAVELTIME
+    	   2 = AGGTOTALTRAVELTIME -->
     	<multipleNorthBoundQueues>1</multipleNorthBoundQueues>
     	<!-- 0 = false, 1 = true -->
     	<urlIn>tcp://localhost:61616</urlIn>

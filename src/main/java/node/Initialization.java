@@ -26,21 +26,24 @@ public class Initialization{
 
 	private enum SensorType {
 		SINGLETRAVELTIME,
-		TOTALTRAVELTIME
+		TOTALTRAVELTIME,
+		AGGTOTALTRAVELTIME
 	}
 
 	private static final Logger log = LoggerFactory.getLogger(Initialization.class);
 
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
-		SensorType sensorType;
+		SensorType sensorType = null;
 		SettingReader st = new SettingReader();
 		String value = st.readElementFromFileXml("settings.xml", "areaNode", "sensorType");
 		System.out.println(value);
 		if (Integer.parseInt(value) == 0 )
 			sensorType = SensorType.SINGLETRAVELTIME;
-		else
+		else if (Integer.parseInt(value) == 1)
 			sensorType = SensorType.TOTALTRAVELTIME;
+		else if (Integer.parseInt(value) == 2)
+			sensorType = SensorType.AGGTOTALTRAVELTIME;
 		log.info("Sensor type is: " + sensorType);
 
 		boolean boolMultipleNorthBoundQueues;
@@ -89,6 +92,10 @@ public class Initialization{
 					}
 					else if (sensorType == SensorType.TOTALTRAVELTIME){
 						an = new TotalTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+						an.addLink(link);
+					}
+					else if (sensorType == SensorType.AGGTOTALTRAVELTIME){
+						an = new AggTotalTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
 						an.addLink(link);
 					}
 					areas.put(r.get("areaname"), an);
