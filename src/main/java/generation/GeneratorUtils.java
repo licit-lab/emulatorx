@@ -86,7 +86,7 @@ public class GeneratorUtils {
                     message.putFloatProperty("coverage", Float.parseFloat(r.get(2).replace(',','.')));
                     message.putStringProperty("timestamp", r.get(3));
                     message.putFloatProperty("speed", Float.parseFloat(r.get(4)));
-                    message.getBodyBuffer().writeString(r.toString());
+                    //message.getBodyBuffer().writeString(r.toString()); //I don't need to send also the CSV record
                     log.info("Sending message {}",message.toString());
                     producer.send(message);
                 } catch (ActiveMQException e) {

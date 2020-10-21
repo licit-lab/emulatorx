@@ -1,7 +1,6 @@
 package link;
 
 import data.util.PacketGenerator;
-import jdk.vm.ci.meta.Local;
 import node.AreaNode;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.slf4j.Logger;
@@ -9,10 +8,10 @@ import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import data.model.totalvehicles.AggTotalVehiclesTravelTimePayload;
 
 public class Link {
 	private long linkId;
@@ -82,26 +81,19 @@ public class Link {
 	}
 
 	public String computeAggTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage){
-		String aggTotalVehiclesTravelTime = null;
+		String aggregateVehiclesTravelTime = null;
 		if(receivedDate.isAfter(finalDate)){
 			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
 			log.info("Number of vehicles transited is {}", numVehicles);
 			//log.info("Total travel time amounts to {}", totalTravelTime);
 			avgTravelTime = stats.getMean();
 			sdTravelTime = stats.getStandardDeviation();
-			aggTotalVehiclesTravelTime = PacketGenerator.aggTotalVehiclesTravelTimePayload(getId(),avgTravelTime,sdTravelTime,numVehicles,startingDate,finalDate);
+			Duration d =  Duration.between(receivedDate,finalDate); //TODO should be made dynamic
+			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimePayload(getId(),avgTravelTime,sdTravelTime,numVehicles,
+					d,startingDate,finalDate);
 			numVehicles = 0;
-			//totalTravelTime = 0;
 			avgTravelTime = 0;
 			sdTravelTime = 0;
-			/*Duration duration =  Duration.between(receivedDate,finalDate);
-			log.info("Difference between final date and received date for the current interval {} mins", duration.toMinutes());
-			long diff = Math.abs(duration.toMinutes());
-			int mul = (int) (diff/intervallo);
-			log.info("The multiplier is {}", mul);
-			mul++;
-			this.finalDate = finalDate.plusMinutes(mul*intervallo);
-			this.startingDate = finalDate.minusMinutes(intervallo);*/
 			this.startingDate = receivedDate;
 			this.finalDate = receivedDate.plusMinutes(intervallo);
 			log.info("New starting date is {}", startingDate.toString());
@@ -113,8 +105,7 @@ public class Link {
 		//When coverage is zero, the observation is still processed but has no effect
 		assert stats != null;
 		stats.addValue(((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC);
-		//totalTravelTime = totalTravelTime + ((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC;
-		return aggTotalVehiclesTravelTime;
+		return aggregateVehiclesTravelTime;
 	}
 
 	public String computeTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) {

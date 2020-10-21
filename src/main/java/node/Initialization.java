@@ -95,7 +95,7 @@ public class Initialization{
 						an.addLink(link);
 					}
 					else if (sensorType == SensorType.AGGTOTALTRAVELTIME){
-						an = new AggTotalTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+						an = new AggregateTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
 						an.addLink(link);
 					}
 					areas.put(r.get("areaname"), an);

@@ -64,7 +64,7 @@ public abstract class AreaNode {
 			sessionOut.start();
 
 			if(multipleNorthBoundQueues) {
-				String NORTHBOUND_SUFFIX = "-NorthBound";
+				String NORTHBOUND_SUFFIX = "-Northbound";
 				sessionOut.createQueue(new SimpleString(areaName + NORTHBOUND_SUFFIX), RoutingType.ANYCAST, new SimpleString(areaName + NORTHBOUND_SUFFIX), true);
 				producer = sessionOut.createProducer(new SimpleString(areaName + NORTHBOUND_SUFFIX));
 			} else {

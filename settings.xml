@@ -4,7 +4,7 @@
             <numberOfThreads>5</numberOfThreads>
     </generator>
     <areaNode>
-    	<sensorType>1</sensorType>
+    	<sensorType>2</sensorType>
     	<!-- 0 = SINGLETRAVELTIME
     	  1 = TOTALTRAVELTIME
     	   2 = AGGTOTALTRAVELTIME -->
