@@ -88,7 +88,7 @@ public class Link {
 			//log.info("Total travel time amounts to {}", totalTravelTime);
 			avgTravelTime = stats.getMean();
 			sdTravelTime = stats.getStandardDeviation();
-			Duration d =  Duration.between(receivedDate,finalDate); //TODO should be made dynamic
+			Duration d =  Duration.between(finalDate,receivedDate); //TODO should be made dynamic
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimePayload(getId(),avgTravelTime,sdTravelTime,numVehicles,
 					d,startingDate,finalDate);
 			numVehicles = 0;
