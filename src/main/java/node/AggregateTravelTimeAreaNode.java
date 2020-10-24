@@ -19,12 +19,12 @@ public class AggregateTravelTimeAreaNode extends AreaNode {
 	protected MessageHandler createMessageHandler() {
 		return msg -> {
 			try {
-				log.info("Aggregate...");
 				log.info("A new speed reading is about to be processed... ");
 				long linkProperty = msg.getLongProperty("linkid");
 				log.info("The link is the following {}", linkProperty);
 				Link link = getLinks().get(linkProperty);
 				log.info("The speed reading refers to link {}", linkProperty);
+				log.info("The speed reading timestamp is {}",msg.getStringProperty("timestamp"));
 				//Computing total travel times
 				String aggregateVehiclesTravelTime = link.computeAggTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
 						msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));

@@ -82,12 +82,16 @@ public class Link {
 
 	public String computeAggTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage){
 		String aggregateVehiclesTravelTime = null;
-		if(receivedDate.isAfter(finalDate)){
+		log.info("Received date is {}", receivedDate);
+		log.info("Final date is {}", finalDate);
+		if(receivedDate.isAfter(finalDate) && numVehicles > 0){
 			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
 			log.info("Number of vehicles transited is {}", numVehicles);
 			//log.info("Total travel time amounts to {}", totalTravelTime);
 			avgTravelTime = stats.getMean();
+			log.error("{}",avgTravelTime);
 			sdTravelTime = stats.getStandardDeviation();
+			log.error("{}",sdTravelTime);
 			Duration d =  Duration.between(finalDate,receivedDate); //TODO should be made dynamic
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimePayload(getId(),avgTravelTime,sdTravelTime,numVehicles,
 					d,startingDate,finalDate);
