@@ -1,9 +1,8 @@
 *.csv
 target/*
 .idea/*
+00h01h_observations.csv
 all_links.csv
+all_observations.csv
 lentilly_links.csv
 lentilly_observations.csv
-00h01h_observations.csv
-*links.*
-*obs*.csv
