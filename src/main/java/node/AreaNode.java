@@ -80,7 +80,6 @@ public abstract class AreaNode {
 		ClientMessage msg;
 		try {
 			msg = sessionOut.createMessage(true);
-			msg.putLongProperty("linkid", linkId);
 			msg.getBodyBuffer().writeString(messageBody);
 			producer.send(msg);
 		} catch (Exception e) {

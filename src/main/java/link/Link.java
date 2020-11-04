@@ -93,7 +93,7 @@ public class Link {
 			sdTravelTime = stats.getStandardDeviation();
 			log.error("{}",sdTravelTime);
 			Duration d =  Duration.between(finalDate,receivedDate); //TODO should be made dynamic
-			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimePayload(getId(),avgTravelTime,sdTravelTime,numVehicles,
+			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(),avgTravelTime,sdTravelTime,numVehicles,
 					d,startingDate,finalDate);
 			numVehicles = 0;
 			avgTravelTime = 0;
@@ -118,7 +118,7 @@ public class Link {
 			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
 			log.info("Number of vehicles transited is {}", numVehicles);
 			log.info("Total travel time amounts to {}", totalTravelTime);
-			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimePayload(getId(),totalTravelTime,numVehicles,startingDate,finalDate);
+			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimeSample(getId(),totalTravelTime,numVehicles,startingDate,finalDate);
 			totalSampleSpeeds = 0;
 			numVehicles = 0;
 			totalTravelTime = 0;

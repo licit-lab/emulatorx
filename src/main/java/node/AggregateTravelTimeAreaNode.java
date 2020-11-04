@@ -5,7 +5,6 @@ import org.apache.activemq.artemis.api.core.client.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.geom.Area;
 import java.time.LocalDateTime;
 
 public class AggregateTravelTimeAreaNode extends AreaNode {
