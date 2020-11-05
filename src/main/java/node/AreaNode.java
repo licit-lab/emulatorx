@@ -19,7 +19,7 @@ public abstract class AreaNode {
 	private ClientSession sessionOut;
 	private ClientProducer producer;
 	private MessageHandler handler;
-	private boolean multipleNorthBoundQueues;
+	private boolean multipleNorthboundQueues;
 	private String urlIn;
 	private String urlOut;
 	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
@@ -29,7 +29,7 @@ public abstract class AreaNode {
 		this.areaName = areaName;
 		this.urlIn = urlIn;
 		this.urlOut = urlOut;
-		multipleNorthBoundQueues = multipleQueues;
+		multipleNorthboundQueues = multipleQueues;
 		createConnections();
 		setHandler(createMessageHandler());
 		setQueueListener();
@@ -63,13 +63,13 @@ public abstract class AreaNode {
 			sessionOut = factoryOut.createSession(true,true);
 			sessionOut.start();
 
-			if(multipleNorthBoundQueues) {
+			if(multipleNorthboundQueues) {
 				String NORTHBOUND_SUFFIX = "-Northbound";
 				sessionOut.createQueue(new SimpleString(areaName + NORTHBOUND_SUFFIX), RoutingType.ANYCAST, new SimpleString(areaName + NORTHBOUND_SUFFIX), true);
 				producer = sessionOut.createProducer(new SimpleString(areaName + NORTHBOUND_SUFFIX));
 			} else {
-				sessionOut.createQueue(new SimpleString("NorthBound"), RoutingType.ANYCAST, new SimpleString("NorthBound"), true);
-				producer = sessionOut.createProducer(new SimpleString("NorthBound"));
+				sessionOut.createQueue(new SimpleString("Northbound"), RoutingType.ANYCAST, new SimpleString("Northbound"), true);
+				producer = sessionOut.createProducer(new SimpleString("Northbound"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

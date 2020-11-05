@@ -25,7 +25,7 @@ public class SingleTravelTimeAreaNode extends AreaNode {
 				double singleVehicleTravelTime = link.computeSingleVehicleTravelTime(msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
 				log.info("The travelTime computed value is: " + singleVehicleTravelTime);
 				//Generating Payload
-				String singleVehicleTravelTimePayload = PacketGenerator.singleVehicleTravelTimePayload(linkProperty,singleVehicleTravelTime,msg.getStringProperty("timestamp"));
+				String singleVehicleTravelTimePayload = PacketGenerator.singleVehicleTravelTimeSample(linkProperty,singleVehicleTravelTime,msg.getStringProperty("timestamp"));
 				log.info("The northbound message payload will be {}", singleVehicleTravelTimePayload);
 				super.sendMessage(linkProperty,singleVehicleTravelTimePayload);
 				log.info("Message has been sent.");

@@ -46,10 +46,10 @@ public class Initialization{
 			sensorType = SensorType.AGGTOTALTRAVELTIME;
 		log.info("Sensor type is: " + sensorType);
 
-		boolean boolMultipleNorthBoundQueues;
-		value = st.readElementFromFileXml("settings.xml", "areaNode", "multipleNorthBoundQueues");
-		boolMultipleNorthBoundQueues = Integer.parseInt(value) == 1 ;
-		log.info("MultipleNorthBoundQueues has been set to: " + boolMultipleNorthBoundQueues);
+		boolean boolMultipleNorthboundQueues;
+		value = st.readElementFromFileXml("settings.xml", "areaNode", "multipleNorthboundQueues");
+		boolMultipleNorthboundQueues = Integer.parseInt(value) == 1 ;
+		log.info("MultipleNorthboundQueues has been set to: " + boolMultipleNorthboundQueues);
 
 		String urlIn = st.readElementFromFileXml("settings.xml", "areaNode", "urlIn");
 		String urlOut = st.readElementFromFileXml("settings.xml", "areaNode", "urlOut");
@@ -87,15 +87,15 @@ public class Initialization{
 					areas.get(r.get("areaname")).addLink(link);
 				else {
 					if (sensorType == SensorType.SINGLETRAVELTIME){
-						an = new SingleTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+						an = new SingleTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
 						an.addLink(link);
 					}
 					else if (sensorType == SensorType.TOTALTRAVELTIME){
-						an = new TotalTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+						an = new TotalTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
 						an.addLink(link);
 					}
 					else if (sensorType == SensorType.AGGTOTALTRAVELTIME){
-						an = new AggregateTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthBoundQueues);
+						an = new AggregateTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
 						an.addLink(link);
 					}
 					areas.put(r.get("areaname"), an);
