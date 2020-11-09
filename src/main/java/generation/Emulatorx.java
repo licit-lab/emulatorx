@@ -98,7 +98,7 @@ public class Emulatorx {
 
 				//Create associations link -> areaNode
 				associations.put(r.get("id"),r.get("areaname"));
-				log.info("Link {} will be associated to {}", r.get("id"),r.get("areaname"));
+				log.info("Link {} is associated to {}", r.get("id"),r.get("areaname"));
 
 				if(areas.containsKey(r.get("areaname")))
 					areas.get(r.get("areaname")).addLink(link);
