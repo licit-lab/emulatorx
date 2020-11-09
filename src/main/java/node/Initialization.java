@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Initialization{
 
-	private enum SensorType {
+	public enum SensorType {
 		SINGLETRAVELTIME,
 		TOTALTRAVELTIME,
 		AGGTOTALTRAVELTIME
@@ -69,6 +69,8 @@ public class Initialization{
 		log.info("Links file path is: " + linkFilePath);
 
 		HashMap<String, AreaNode> areas = new HashMap<>(); //It maintains associations between links and areas
+
+
 
 		Reader reader;
 		try {

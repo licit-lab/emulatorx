@@ -20,14 +20,14 @@ public class TotalTravelTimeAreaNode extends AreaNode {
 				log.info("A new speed reading is about to be processed... ");
 				long linkProperty = msg.getLongProperty("linkid");
 				log.info("The link is the following {}", linkProperty);
-				Link link = getLinks().get(linkProperty);
+				Link link = super.links.getLink(linkProperty);
 				log.info("The speed reading refers to link {}", linkProperty);
 				//Computing total travel times
 				String totalVehiclesTravelTime = link.computeTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
 						msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
 				if(totalVehiclesTravelTime != null){
 					log.info("The northbound message payload will be {}", totalVehiclesTravelTime);
-					super.sendMessage(linkProperty,totalVehiclesTravelTime);
+					super.sendMessage(totalVehiclesTravelTime);
 					log.info("Message has been sent.");
 				}
 			} catch (Exception e) {

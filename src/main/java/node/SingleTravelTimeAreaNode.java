@@ -19,7 +19,7 @@ public class SingleTravelTimeAreaNode extends AreaNode {
 			try {
 				log.info("A new speed reading is about to be processed...");
 				long linkProperty = msg.getLongProperty("linkid");
-				Link link = super.getLinks().get(linkProperty);
+				Link link = super.links.getLink(linkProperty);
 				log.info("The speed reading refers to link {}", linkProperty);
 				//Computing single vehicle travel time
 				double singleVehicleTravelTime = link.computeSingleVehicleTravelTime(msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
@@ -27,7 +27,7 @@ public class SingleTravelTimeAreaNode extends AreaNode {
 				//Generating Payload
 				String singleVehicleTravelTimePayload = PacketGenerator.singleVehicleTravelTimeSample(linkProperty,singleVehicleTravelTime,msg.getStringProperty("timestamp"));
 				log.info("The northbound message payload will be {}", singleVehicleTravelTimePayload);
-				super.sendMessage(linkProperty,singleVehicleTravelTimePayload);
+				super.sendMessage(singleVehicleTravelTimePayload);
 				log.info("Message has been sent.");
 			} catch (Exception e) {
 				e.printStackTrace();

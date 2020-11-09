@@ -1,6 +1,7 @@
 package node;
 
 import link.Link;
+import link.Links;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.RoutingType;
 import org.apache.activemq.artemis.api.core.SimpleString;
@@ -8,13 +9,12 @@ import org.apache.activemq.artemis.api.core.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+
 
 
 public abstract class AreaNode {
 
 	private String areaName;
-	private HashMap<Long, Link> links= new HashMap<>(); //It maintains the links for each area, the link ID is used as the key
 	private ClientConsumer consumer;
 	private ClientSession sessionOut;
 	private ClientProducer producer;
@@ -22,6 +22,7 @@ public abstract class AreaNode {
 	private boolean multipleNorthboundQueues;
 	private String urlIn;
 	private String urlOut;
+	protected Links links;
 	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
 	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
@@ -29,18 +30,19 @@ public abstract class AreaNode {
 		this.areaName = areaName;
 		this.urlIn = urlIn;
 		this.urlOut = urlOut;
+		this.links = new Links();
 		multipleNorthboundQueues = multipleQueues;
 		createConnections();
 		setHandler(createMessageHandler());
 		setQueueListener();
 	}
 
-	public void addLink(Link l) {
-		getLinks().put(l.getId(),l);
+	public String getAreaName(){
+		return this.areaName;
 	}
 
-	public HashMap<Long, Link> getLinks() {
-		return links;
+	public void addLink(Link link) {
+		this.links.addLink(link);
 	}
 
 	private void setHandler(MessageHandler handler) {
@@ -76,7 +78,7 @@ public abstract class AreaNode {
 		}
     }
 
-	public void sendMessage(long linkId, String messageBody){
+	public void sendMessage(String messageBody){
 		ClientMessage msg;
 		try {
 			msg = sessionOut.createMessage(true);
