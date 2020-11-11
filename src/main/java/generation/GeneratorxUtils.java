@@ -1,7 +1,6 @@
 package generation;
 
 import org.apache.activemq.artemis.api.core.ActiveMQException;
-import org.apache.activemq.artemis.api.core.RoutingType;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientProducer;
@@ -22,7 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class GeneratorxUtils {
-	private static final Logger log = LoggerFactory.getLogger(Generator.class);
+	private static final Logger log = LoggerFactory.getLogger(GeneratorxUtils.class);
 
 	private static long timestampsDifference(String previous, String current, int scala) {
 		SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -64,7 +63,6 @@ public class GeneratorxUtils {
 					message.putFloatProperty("coverage", Float.parseFloat(r.get(2).replace(',','.')));
 					message.putStringProperty("timestamp", r.get(3));
 					message.putFloatProperty("speed", Float.parseFloat(r.get(4)));
-					//message.getBodyBuffer().writeString(r.toString()); //I don't need to send also the CSV record
 					log.info("Sending message {}",message.toString());
 					producer.send(message);
 				} catch (ActiveMQException e) {

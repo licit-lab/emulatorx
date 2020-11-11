@@ -11,14 +11,15 @@ import java.util.HashMap;
 import static generation.GeneratorxUtils.createAndSend;
 
 public class Generatorx extends Thread {
-	private static int scala = 10;
+	private static int scala;
 	private  static HashMap<String, String> associations; //It maintains associations between links and areas
-	private static final Logger log = LoggerFactory.getLogger(Generator.class);
+	private static final Logger log = LoggerFactory.getLogger(Generatorx.class);
 	private  ClientSession session;
 
-	public Generatorx(HashMap<String, String> associations, ClientSession session){
+	public Generatorx(HashMap<String, String> associations, ClientSession session, int scala){
 		this.associations = associations;
 		this.session = session;
+		Generatorx.scala = scala;
 	}
 
 	@Override
@@ -31,12 +32,6 @@ public class Generatorx extends Thread {
 		scala = Integer.parseInt(value);
 		log.info("Scala value has been set at: " + scala);
 
-		String urlIn = st.readElementFromFileXml("settings.xml", "areaNode", "urlIn");
-		log.info("Broker in: " + urlIn);
-
-
-
-		log.info("Sending messages...");
 		try {
 			sendMessage(session);
 		} catch (InterruptedException e) {

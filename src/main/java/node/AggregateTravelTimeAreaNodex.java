@@ -5,12 +5,10 @@ import org.apache.activemq.artemis.api.core.client.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDateTime;
+public class AggregateTravelTimeAreaNodex extends AreaNodex {
+	private static final Logger log = LoggerFactory.getLogger(AggregateTravelTimeAreaNodex.class);
 
-public class AggregateTravelTimeAreaNode extends AreaNode {
-	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
-
-	public AggregateTravelTimeAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
+	public AggregateTravelTimeAreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
 		super(urlIn, urlOut, areaName, multipleQueues);
 	}
 
@@ -24,14 +22,16 @@ public class AggregateTravelTimeAreaNode extends AreaNode {
 				Link link = super.links.getLink(linkId);
 				log.info("The speed reading refers to link {}", linkId);
 				log.info("The speed reading timestamp is {}",msg.getStringProperty("timestamp"));
-				//Computing total travel times
+				//Update link
+				link.updateAggregateTotalVehiclesTravelTime(msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
+				/*//Computing total travel times
 				String aggregateVehiclesTravelTime = link.computeAggTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
 						msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
 				if(aggregateVehiclesTravelTime != null){
 					log.info("The northbound message payload will be {}", aggregateVehiclesTravelTime);
 					super.sendMessage(aggregateVehiclesTravelTime);
 					log.info("Message has been sent.");
-				}
+				}*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -2,9 +2,6 @@ package generation;
 
 import link.Link;
 import node.*;
-import org.apache.activemq.artemis.api.core.ActiveMQException;
-import org.apache.activemq.artemis.api.core.RoutingType;
-import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.ActiveMQClient;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.ClientSessionFactory;
@@ -31,7 +28,7 @@ public class Emulatorx {
 		AGGTOTALTRAVELTIME
 	}
 
-	private static final Logger log = LoggerFactory.getLogger(Initialization.class);
+	private static final Logger log = LoggerFactory.getLogger(Emulatorx.class);
 	private static HashMap<String, String> associations = new HashMap<>();
 
 	public static void main(String[] args) {
@@ -70,7 +67,11 @@ public class Emulatorx {
 		String linkFilePath = st.readElementFromFileXml("settings.xml", "Files", "links");
 		log.info("Links file path is: " + linkFilePath);
 
-		HashMap<String, AreaNode> areas = new HashMap<>(); //It maintains associations between links and areas
+		value = st.readElementFromFileXml("settings.xml", "generator", "scala");
+		int scala = Integer.parseInt(value);
+		log.info("Scala value has been set at: " + scala);
+
+		HashMap<String, AreaNodex> areas = new HashMap<>(); //It maintains associations between links and areas
 
 		ClientSessionFactory factory;
 		ClientSession session = null;
@@ -88,7 +89,8 @@ public class Emulatorx {
 			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
 			CSVParser csvParser = csvFormat.parse(reader);
 			for (CSVRecord r: csvParser){
-				AreaNode an = null;
+				//Creating area node and associating links
+				AreaNodex an = null;
 				Link link = new Link(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")), Integer.parseInt(r.get("frc")),
 						Integer.parseInt(r.get("netclass")), Integer.parseInt(r.get("fow")),
@@ -96,33 +98,34 @@ public class Emulatorx {
 						Integer.parseInt(interval),
 						startTime);
 
-				//Create associations link -> areaNode
-				associations.put(r.get("id"),r.get("areaname"));
-				log.info("Link {} is associated to {}", r.get("id"),r.get("areaname"));
-
 				if(areas.containsKey(r.get("areaname")))
 					areas.get(r.get("areaname")).addLink(link);
 				else {
 					if (sensorType == SensorType.SINGLETRAVELTIME){
-						an = new SingleTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
+						an = new SingleTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
 						an.addLink(link);
 					}
 					else if (sensorType == SensorType.TOTALTRAVELTIME){
-						an = new TotalTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
+						an = new TotalTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
 						an.addLink(link);
 					}
 					else if (sensorType == SensorType.AGGTOTALTRAVELTIME){
-						an = new AggregateTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
+						an = new AggregateTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
 						an.addLink(link);
 					}
 					areas.put(r.get("areaname"), an);
+					
+					//Create associations link -> areaNode
+					associations.put(r.get("id"),r.get("areaname"));
+					log.info("Link {} is associated to {}", r.get("id"),r.get("areaname"));
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 		//Then follows the generator
-		Generatorx gx = new Generatorx(associations,session);
+		Generatorx gx = new Generatorx(associations,session,scala);
 		gx.start();
 	}
 }

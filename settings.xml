@@ -1,6 +1,6 @@
 <settings>
     <generator>
-            <scala>100</scala>
+            <scala>1</scala>
             <numberOfThreads>5</numberOfThreads>
     </generator>
     <areaNode>

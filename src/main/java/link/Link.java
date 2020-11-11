@@ -1,7 +1,6 @@
 package link;
 
 import data.util.PacketGenerator;
-import node.AreaNode;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +31,7 @@ public class Link {
 	private static final double FACTOR_M2KM = 0.001;
 	private static final double FACTORH_2SEC = 3600;
 
-	private static final Logger log = LoggerFactory.getLogger(AreaNode.class);
+	private static final Logger log = LoggerFactory.getLogger(Link.class);
 
 	public Link(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
 				String areaname, String name, String geom, int intervallo, String startingDate) {
@@ -78,6 +77,32 @@ public class Link {
 			for (int j = 0; j < n.length; j++)
 				geom[i][j] = Float.parseFloat(n[j]);
 		}
+	}
+
+	public synchronized void updateAggregateTotalVehiclesTravelTime(float sampleSpeed, float coverage){
+		numVehicles++;
+		assert stats != null;
+		stats.addValue(((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC);
+	}
+
+	private void resetAggregateTotalVehiclesTravelTime(){
+		numVehicles = 0;
+		stats.clear();
+	}
+
+	public synchronized String getAggregateTotalVehiclesTravelTime(){
+		String aggregateVehiclesTravelTime = null;
+		if(numVehicles > 0) {
+			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
+			log.info("Number of vehicles transited is {}", numVehicles);
+			double avgTravelTime = stats.getMean();
+			double sdTravelTime = stats.getStandardDeviation();
+			Duration d = Duration.between(finalDate, finalDate); //TODO should be made dynamic
+			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
+					d, startingDate, finalDate);
+			resetAggregateTotalVehiclesTravelTime();
+		}
+		return aggregateVehiclesTravelTime;
 	}
 
 	public String computeAggTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage){
