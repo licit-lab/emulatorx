@@ -120,14 +120,13 @@ public class Linkx {
 			resetAggregateTotalVehiclesTravelTime();
 		}
 		//wake up other thread
-		/*if(currentDate.isEqual(finalDate) && currentDate.isBefore(finalDate.plusSeconds(10))){
+		log.info("{}",currentDate);
+		if(currentDate.isEqual(finalDate) || (currentDate.isAfter(finalDate)
+				&& finalDate.isBefore(finalDate.plusSeconds(10)))){
 			log.warn("Allowing the processing of the borderline sample...");
 			check = true;
-		}*/
-		log.warn("Allowing the processing of the borderline sample...");
+		}
 		updateFinalDate();
-		if(!check)
-			check = true;
 		this.notify();
 		return aggregateVehiclesTravelTime;
 	}
