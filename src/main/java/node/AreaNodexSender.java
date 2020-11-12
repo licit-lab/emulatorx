@@ -34,6 +34,7 @@ public class AreaNodexSender extends Thread {
 			Link l = links.getLinks().get(linkId);
 			log.info("Sending messages for link {}",linkId);
 			String msg = l.getAggregateTotalVehiclesTravelTime();
+			log.info("MSG = {}", msg);
 			if(msg != null)
 				sendMessage(msg);
 			else

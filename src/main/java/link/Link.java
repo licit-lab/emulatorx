@@ -18,8 +18,6 @@ public class Link {
 	private int ffs,speedlimit,frc,netclass,fow;
 	private String routenumber,areaname,name;
 	private double totalTravelTime;
-	private double avgTravelTime;
-	private double sdTravelTime;
 	private float[][] geom;
 	private int intervallo;
 	private double totalSampleSpeeds;
@@ -69,6 +67,11 @@ public class Link {
 		log.info("Ending date is {}", this.finalDate.toString());
 	}
 
+	private void updateFinalDate(){
+		this.startingDate = finalDate;
+		this.finalDate = this.finalDate.plusMinutes(intervallo);
+	}
+
 	private void setGeomFromString(String s) {
 		String[] l = s.split("\\|");
 		geom = new float[l.length][2];
@@ -97,11 +100,12 @@ public class Link {
 			log.info("Number of vehicles transited is {}", numVehicles);
 			double avgTravelTime = stats.getMean();
 			double sdTravelTime = stats.getStandardDeviation();
-			Duration d = Duration.between(finalDate, finalDate); //TODO should be made dynamic
+			Duration d = Duration.between(startingDate, finalDate);
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
 					d, startingDate, finalDate);
 			resetAggregateTotalVehiclesTravelTime();
 		}
+		updateFinalDate();
 		return aggregateVehiclesTravelTime;
 	}
 
@@ -113,12 +117,12 @@ public class Link {
 			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
 			log.info("Number of vehicles transited is {}", numVehicles);
 			//log.info("Total travel time amounts to {}", totalTravelTime);
-			avgTravelTime = stats.getMean();
-			log.error("{}",avgTravelTime);
-			sdTravelTime = stats.getStandardDeviation();
-			log.error("{}",sdTravelTime);
+			double avgTravelTime = stats.getMean();
+			log.error("{}", avgTravelTime);
+			double sdTravelTime = stats.getStandardDeviation();
+			log.error("{}", sdTravelTime);
 			Duration d =  Duration.between(finalDate,receivedDate); //TODO should be made dynamic
-			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(),avgTravelTime,sdTravelTime,numVehicles,
+			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime,numVehicles,
 					d,startingDate,finalDate);
 			numVehicles = 0;
 			avgTravelTime = 0;

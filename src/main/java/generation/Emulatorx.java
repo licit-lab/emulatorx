@@ -114,11 +114,10 @@ public class Emulatorx {
 						an.addLink(link);
 					}
 					areas.put(r.get("areaname"), an);
-					
-					//Create associations link -> areaNode
-					associations.put(r.get("id"),r.get("areaname"));
-					log.info("Link {} is associated to {}", r.get("id"),r.get("areaname"));
 				}
+				//Create associations link -> areaNode
+				associations.put(r.get("id"),r.get("areaname"));
+				log.info("Link {} is associated to {}", r.get("id"),r.get("areaname"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
