@@ -38,8 +38,9 @@ public class GeneratorxUtils {
 		return millisDiff/scala;
 	}
 
-	static void createAndSend(ClientSession session, String obsFilePath, int scala, HashMap<String, String> associations) throws InterruptedException {
-		String previousTmp = null;
+	static void createAndSend(ClientSession session, String obsFilePath, int scala, HashMap<String, String> associations,
+							  String startTime) throws InterruptedException {
+		String previousTmp = startTime;
 		String currentTmp;
 		Reader reader;
 		try {
@@ -48,8 +49,6 @@ public class GeneratorxUtils {
 			CSVParser csvParser = csvFormat.parse(reader);
 			for (CSVRecord r: csvParser){
 				currentTmp=r.get(3);
-				if(r.getRecordNumber() == 1)
-					previousTmp = currentTmp;
 				long millisDiff = timestampsDifference(previousTmp, currentTmp, scala);
 				log.info("Waiting {} ms before sending next sample",millisDiff);
 				Thread.sleep(millisDiff); //Wait for a given scaled interval between two samples

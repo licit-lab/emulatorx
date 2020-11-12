@@ -12,14 +12,16 @@ import static generation.GeneratorxUtils.createAndSend;
 
 public class Generatorx extends Thread {
 	private static int scala;
+	private static String startTime;
 	private  static HashMap<String, String> associations; //It maintains associations between links and areas
 	private static final Logger log = LoggerFactory.getLogger(Generatorx.class);
 	private  ClientSession session;
 
-	public Generatorx(HashMap<String, String> associations, ClientSession session, int scala){
+	public Generatorx(HashMap<String, String> associations, ClientSession session, int scala, String startTime){
 		this.associations = associations;
 		this.session = session;
 		Generatorx.scala = scala;
+		this.startTime = startTime;
 	}
 
 	@Override
@@ -42,6 +44,6 @@ public class Generatorx extends Thread {
 		log.info("Sending messages...");
 		SettingReader st = new SettingReader();
 		String obsFilePath = st.readElementFromFileXml("settings.xml", "Files", "observations");
-		createAndSend(session, obsFilePath, scala, associations);
+		createAndSend(session, obsFilePath, scala, associations,startTime);
 	}
 }

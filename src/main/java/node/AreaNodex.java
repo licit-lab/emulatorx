@@ -35,7 +35,6 @@ public abstract class AreaNodex {
 		this.links = new Links();
 		multipleNorthboundQueues = multipleQueues;
 		createConsumer();
-		createProducer();
 		setHandler(createMessageHandler());
 		setQueueListener();
 	}
@@ -62,7 +61,7 @@ public abstract class AreaNodex {
 		}
 	}
 
-	private void createProducer(){
+	public void createProducer(){
 		ClientSessionFactory factoryOut;
 		try{
 			ServerLocator locatorOut = ActiveMQClient.createServerLocator(urlOut);
@@ -80,7 +79,7 @@ public abstract class AreaNodex {
 			}
 			AreaNodexSender sender = new AreaNodexSender(sessionOut, producer,links);
 			ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-			executorService.scheduleAtFixedRate(sender,0,3, TimeUnit.MINUTES);
+			executorService.scheduleAtFixedRate(sender,3,3, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

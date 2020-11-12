@@ -19,6 +19,7 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Set;
 
 public class Emulatorx {
 
@@ -32,7 +33,6 @@ public class Emulatorx {
 	private static HashMap<String, String> associations = new HashMap<>();
 
 	public static void main(String[] args) {
-
 		SensorType sensorType = null;
 		SettingReader st = new SettingReader();
 		String value = st.readElementFromFileXml("settings.xml", "areaNode", "sensorType");
@@ -122,9 +122,17 @@ public class Emulatorx {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		try {
+			Thread.sleep(20000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		log.info("Creating the producers...");
+		Set<String> areaNames = areas.keySet();
+		for(String a: areaNames)
+			areas.get(a).createProducer();
 		//Then follows the generator
-		Generatorx gx = new Generatorx(associations,session,scala);
+		Generatorx gx = new Generatorx(associations,session,scala,startTime);
 		gx.start();
 	}
 }
