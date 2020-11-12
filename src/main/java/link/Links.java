@@ -3,29 +3,29 @@ package link;
 import java.util.HashMap;
 
 public class Links {
-	private HashMap<Long,Link> links;
+	private HashMap<Long,Linkx> links;
 
 	public Links() {
 		this.links = new HashMap<>();
 	}
 
-	public Links(HashMap<Long,Link> links) {
+	public Links(HashMap<Long,Linkx> links) {
 		this.links = links;
 	}
 
-	public HashMap<Long, Link> getLinks() {
+	public HashMap<Long, Linkx> getLinks() {
 		return links;
 	}
 
-	public void setLinks(HashMap<Long,Link> links) {
+	public void setLinks(HashMap<Long,Linkx> links) {
 		this.links = links;
 	}
 
-	public void addLink(Link link){
+	public void addLink(Linkx link){
 		this.links.put(link.getId(),link);
 	}
 
-	public Link getLink(long linkId){
+	public Linkx getLink(long linkId){
 		return this.links.get(linkId);
 	}
 }

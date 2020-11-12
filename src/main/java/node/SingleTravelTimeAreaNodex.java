@@ -1,7 +1,7 @@
 package node;
 
 import data.util.PacketGenerator;
-import link.Link;
+import link.Linkx;
 import org.apache.activemq.artemis.api.core.client.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class SingleTravelTimeAreaNodex extends AreaNodex {
 			try {
 				log.info("A new speed reading is about to be processed...");
 				long linkProperty = msg.getLongProperty("linkid");
-				Link link = super.links.getLink(linkProperty);
+				Linkx link = super.links.getLink(linkProperty);
 				log.info("The speed reading refers to link {}", linkProperty);
 				//Computing single vehicle travel time
 				double singleVehicleTravelTime = link.computeSingleVehicleTravelTime(msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));

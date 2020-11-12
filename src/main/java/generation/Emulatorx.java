@@ -1,6 +1,6 @@
 package generation;
 
-import link.Link;
+import link.Linkx;
 import node.*;
 import org.apache.activemq.artemis.api.core.client.ActiveMQClient;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
@@ -32,7 +32,7 @@ public class Emulatorx {
 	private static HashMap<String, String> associations = new HashMap<>();
 
 	public static void main(String[] args) {
-		BasicConfigurator.configure();
+
 		SensorType sensorType = null;
 		SettingReader st = new SettingReader();
 		String value = st.readElementFromFileXml("settings.xml", "areaNode", "sensorType");
@@ -91,7 +91,7 @@ public class Emulatorx {
 			for (CSVRecord r: csvParser){
 				//Creating area node and associating links
 				AreaNodex an = null;
-				Link link = new Link(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
+				Linkx link = new Linkx(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")), Integer.parseInt(r.get("frc")),
 						Integer.parseInt(r.get("netclass")), Integer.parseInt(r.get("fow")),
 						r.get("routenumber"),r.get("areaname"),r.get("name"),r.get("geom"),

@@ -24,7 +24,6 @@ public class Generatorx extends Thread {
 
 	@Override
 	public void run() {
-		BasicConfigurator.configure();
 		log.info("Launching the generator...");
 
 		SettingReader st = new SettingReader();

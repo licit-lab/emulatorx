@@ -1,7 +1,7 @@
 package node;
 
-import link.Link;
 import link.Links;
+import link.Linkx;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.RoutingType;
 import org.apache.activemq.artemis.api.core.SimpleString;
@@ -40,7 +40,7 @@ public abstract class AreaNodex {
 		setQueueListener();
 	}
 
-	public void addLink(Link link) {
+	public void addLink(Linkx link) {
 		this.links.addLink(link);
 	}
 

@@ -1,7 +1,7 @@
 package node;
 
-import link.Link;
 import link.Links;
+import link.Linkx;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientProducer;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
@@ -31,9 +31,14 @@ public class AreaNodexSender extends Thread {
 		log.info("Sending messages northbound...");
 		Set<Long> linkIds = links.getLinks().keySet();
 		for(Long linkId: linkIds){
-			Link l = links.getLinks().get(linkId);
+			Linkx l = links.getLinks().get(linkId);
 			log.info("Sending messages for link {}",linkId);
-			String msg = l.getAggregateTotalVehiclesTravelTime();
+			String msg = null;
+			try {
+				msg = l.getAggregateTotalVehiclesTravelTime();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			log.info("MSG = {}", msg);
 			if(msg != null)
 				sendMessage(msg);
