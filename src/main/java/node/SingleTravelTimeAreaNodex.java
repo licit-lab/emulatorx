@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 public class SingleTravelTimeAreaNodex extends AreaNodex {
 	private static final Logger log = LoggerFactory.getLogger(SingleTravelTimeAreaNodex.class);
 
-	public SingleTravelTimeAreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
-		super(urlIn, urlOut,areaName, multipleQueues);
+	public SingleTravelTimeAreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues, int scala) {
+		super(urlIn, urlOut,areaName, multipleQueues, scala);
 	}
 
 	@Override

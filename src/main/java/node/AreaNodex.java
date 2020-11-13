@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 
 
 public abstract class AreaNodex {
-
 	private String areaName;
 	private ClientConsumer consumer;
 	private ClientSession sessionOut;
@@ -25,10 +24,11 @@ public abstract class AreaNodex {
 	private String urlIn;
 	private String urlOut;
 	protected Links links;
+	protected int scala;
 	private static final Logger log = LoggerFactory.getLogger(AreaNodex.class);
 	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-	public AreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
+	public AreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues, int scala) {
 		this.areaName = areaName;
 		this.urlIn = urlIn;
 		this.urlOut = urlOut;
@@ -37,6 +37,7 @@ public abstract class AreaNodex {
 		createConsumer();
 		setHandler(createMessageHandler());
 		setQueueListener();
+		this.scala = scala;
 	}
 
 	public void addLink(Linkx link) {
@@ -79,7 +80,8 @@ public abstract class AreaNodex {
 			}
 			AreaNodexSender sender = new AreaNodexSender(sessionOut, producer,links);
 			ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-			executorService.scheduleAtFixedRate(sender,3,3, TimeUnit.MINUTES);
+			long period = 3/scala;
+			executorService.scheduleAtFixedRate(sender,period,period, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

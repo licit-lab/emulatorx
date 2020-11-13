@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 public class AggregateTravelTimeAreaNodex extends AreaNodex {
 	private static final Logger log = LoggerFactory.getLogger(AggregateTravelTimeAreaNodex.class);
 
-	public AggregateTravelTimeAreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues) {
-		super(urlIn, urlOut, areaName, multipleQueues);
+	public AggregateTravelTimeAreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues,int scala) {
+		super(urlIn, urlOut, areaName, multipleQueues,scala);
 	}
 
 	@Override
