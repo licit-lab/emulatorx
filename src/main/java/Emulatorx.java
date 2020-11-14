@@ -1,5 +1,4 @@
-package generation;
-
+import generation.Generatorx;
 import link.Linkx;
 import node.*;
 import org.apache.activemq.artemis.api.core.client.ActiveMQClient;
@@ -9,7 +8,6 @@ import org.apache.activemq.artemis.api.core.client.ServerLocator;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.SettingReader;
@@ -73,16 +71,6 @@ public class Emulatorx {
 
 		HashMap<String, AreaNodex> areas = new HashMap<>(); //It maintains associations between links and areas
 
-		ClientSessionFactory factory;
-		ClientSession session = null;
-		try {
-			ServerLocator locator = ActiveMQClient.createServerLocator(urlIn);
-			factory = locator.createSessionFactory();
-			session = factory.createSession();
-		} catch (Exception e) {
-			log.error(e.getMessage());
-		}
-
 		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get(linkFilePath));
@@ -102,15 +90,15 @@ public class Emulatorx {
 					areas.get(r.get("areaname")).addLink(link);
 				else {
 					if (sensorType == SensorType.SINGLETRAVELTIME){
-						an = new SingleTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
+						an = new SingleTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues,scala);
 						an.addLink(link);
 					}
 					else if (sensorType == SensorType.TOTALTRAVELTIME){
-						an = new TotalTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
+						an = new TotalTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues,scala);
 						an.addLink(link);
 					}
 					else if (sensorType == SensorType.AGGTOTALTRAVELTIME){
-						an = new AggregateTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues);
+						an = new AggregateTravelTimeAreaNodex(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues,scala);
 						an.addLink(link);
 					}
 					areas.put(r.get("areaname"), an);
@@ -123,7 +111,7 @@ public class Emulatorx {
 			e.printStackTrace();
 		}
 		try {
-			Thread.sleep(20000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -132,7 +120,7 @@ public class Emulatorx {
 		for(String a: areaNames)
 			areas.get(a).createProducer();
 		//Then follows the generator
-		Generatorx gx = new Generatorx(associations,session,scala,startTime);
+		Generatorx gx = new Generatorx(associations,urlIn,scala,startTime,Integer.parseInt(interval),areaNames);
 		gx.start();
 	}
 }

@@ -1,49 +1,177 @@
 package generation;
 
-import org.apache.activemq.artemis.api.core.client.ClientSession;
-import org.apache.log4j.BasicConfigurator;
+import org.apache.activemq.artemis.api.core.ActiveMQException;
+import org.apache.activemq.artemis.api.core.SimpleString;
+import org.apache.activemq.artemis.api.core.client.*;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import util.SettingReader;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-
-import static generation.GeneratorxUtils.createAndSend;
+import java.util.Iterator;
+import java.util.Set;
 
 public class Generatorx extends Thread {
-	private static int scala;
-	private static String startTime;
-	private  static HashMap<String, String> associations; //It maintains associations between links and areas
-	private static final Logger log = LoggerFactory.getLogger(Generatorx.class);
-	private  ClientSession session;
+	private int scala;
+	private LocalDateTime startTime;
+	private LocalDateTime finalTime;
+	private HashMap<String, String> associations; //It maintains associations between links and areas
+	private final Logger log = LoggerFactory.getLogger(Generatorx.class);
+	private ClientSession session;
+	private int interval;
+	private LocalDateTime lastDate;
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+	private Set<String> areaNames;
 
-	public Generatorx(HashMap<String, String> associations, ClientSession session, int scala, String startTime){
+	public Generatorx(HashMap<String, String> associations, String urlIn, int scala, String startTime,
+					  int interval, Set<String> areaNames){
 		this.associations = associations;
-		this.session = session;
-		Generatorx.scala = scala;
-		this.startTime = startTime;
+		this.scala = scala;
+		this.startTime = LocalDateTime.parse(startTime,formatter);
+		this.finalTime = this.startTime.plusMinutes(interval);
+		this.interval = interval;
+		this.areaNames = areaNames;
+		ClientSessionFactory factory;
+		this.session = null;
+		try {
+			ServerLocator locator = ActiveMQClient.createServerLocator(urlIn);
+			factory = locator.createSessionFactory();
+			session = factory.createSession(true,true);
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
 	}
 
 	@Override
 	public void run() {
 		log.info("Launching the generator...");
-
 		SettingReader st = new SettingReader();
-		String value = st.readElementFromFileXml("settings.xml", "generator", "scala");
-		scala = Integer.parseInt(value);
-		log.info("Scala value has been set at: " + scala);
-
+		String obsFilePath = st.readElementFromFileXml("settings.xml", "Files", "observations");
 		try {
-			sendMessage(session);
+			createAndSend(obsFilePath, scala, startTime);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private static void sendMessage(ClientSession session) throws InterruptedException {
-		log.info("Sending messages...");
-		SettingReader st = new SettingReader();
-		String obsFilePath = st.readElementFromFileXml("settings.xml", "Files", "observations");
-		createAndSend(session, obsFilePath, scala, associations,startTime);
+	private void createAndSend(String obsFilePath, int scala,
+							   LocalDateTime startTime) throws InterruptedException {
+		LocalDateTime previousTime = startTime;
+		LocalDateTime firstTime, secondTime = null;
+		Reader reader;
+		try {
+			reader = Files.newBufferedReader(Paths.get(obsFilePath));
+			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
+			CSVParser csvParser = csvFormat.parse(reader);
+			Iterator<CSVRecord> iterator = csvParser.iterator();
+
+			while(iterator.hasNext()){
+				CSVRecord record = iterator.next();
+				previousTime = handleRecord(record,previousTime,scala);
+				if(iterator.hasNext())
+					previousTime  = handleRecord(iterator.next(),previousTime,scala);
+			}
+			log.info("Sending final placeholder");
+			sendPlaceHolder();
+			Thread.sleep(10000);
+			/*for (CSVRecord r: csvParser){
+				currentTime = LocalDateTime.parse(r.get(3),formatter);
+				long millisDiff = timestampsDifference(previousTime, , scala);
+				log.info("Waiting {} ms before sending next sample",millisDiff);
+				Thread.sleep(millisDiff); //Wait for a given scaled interval between two samples
+				previousTime = currenTime;
+				if(.isEqual(finalTime) || .isAfter(finalTime)) {
+					log.info("");
+					sendPlaceHolder();
+					updateDates();
+					this.sleep(2500);
+				}
+				sendSample(r);
+			}*/
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+
+	private LocalDateTime handleRecord(CSVRecord record,LocalDateTime previousTime, int scala){
+		LocalDateTime currentTime = LocalDateTime.parse(record.get(3),formatter);
+		if(currentTime.isEqual(finalTime) || currentTime.isAfter(finalTime)){
+			log.info("Sending placeholder");
+			sendPlaceHolder();
+			Duration duration =  Duration.between(currentTime,finalTime);
+			long diff = Math.abs(duration.toMinutes());
+			int mul = (int) (diff/interval);
+			log.info("The multiplier is {}", mul);
+			mul++;
+			updateDates(mul);
+		}
+		long millisDiff = timestampsDifference(previousTime, currentTime, scala);
+		log.info("Waiting {} ms before sending next sample",millisDiff);
+		try {
+			Thread.sleep(millisDiff); //Wait for a given scaled interval between two samples
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		previousTime = currentTime;
+		sendSample(record);
+		return previousTime;
+	}
+
+	private long timestampsDifference(LocalDateTime previous, LocalDateTime current, int scala) {
+		return Math.abs(Duration.between(previous,current).toMillis()/scala);
+	}
+
+	private void sendPlaceHolder(){
+		for(String s: areaNames){
+			SimpleString queue = new SimpleString(s);
+			ClientProducer producer;
+			try {
+				producer = session.createProducer(queue);
+				ClientMessage message = session.createMessage(true);
+				message.putBooleanProperty("placeholder",true);
+				log.info("Sending message {}",message.toString());
+				producer.send(message);
+				producer.close();
+			} catch (ActiveMQException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void sendSample(CSVRecord r){
+		SimpleString queue = new SimpleString(associations.get(r.get(1)));
+		ClientProducer producer;
+		try {
+			producer = session.createProducer(queue);
+			ClientMessage message = session.createMessage(true);
+			message.putLongProperty("linkid", Long.parseLong(r.get(1)));
+			message.putFloatProperty("coverage", Float.parseFloat(r.get(2).replace(',','.')));
+			message.putStringProperty("timestamp", r.get(3));
+			message.putFloatProperty("speed", Float.parseFloat(r.get(4)));
+			message.putBooleanProperty("placeholder",false);
+			log.info("Sending message {}",message.toString());
+			producer.send(message);
+			producer.close();
+		} catch (ActiveMQException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void updateDates(int mul){
+		this.startTime = this.startTime.plusMinutes(interval*mul);
+		log.info("New startTime {}",startTime);
+		this.finalTime = this.startTime.plusMinutes(interval);
+		log.info("New endTime {}",finalTime);
+	}
+
 }

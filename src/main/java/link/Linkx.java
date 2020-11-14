@@ -84,7 +84,7 @@ public class Linkx {
 	}
 
 	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) throws InterruptedException {
-		this.currentDate = receivedDate;
+		/*this.currentDate = receivedDate;
 		if(currentDate.isEqual(finalDate) || (currentDate.isAfter(finalDate)
 				&& finalDate.isBefore(finalDate.plusSeconds(10)))){
 			log.warn("This sample has a timestamp around the interval limit, so I will wait...");
@@ -93,7 +93,7 @@ public class Linkx {
 				this.wait(10000);
 			}
 			check = false;
-		}
+		}*/
 		numVehicles++;
 		assert stats != null;
 		stats.addValue(((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC);
@@ -106,8 +106,8 @@ public class Linkx {
 	}
 
 	public synchronized String getAggregateTotalVehiclesTravelTime() throws InterruptedException {
-		log.warn("Giving 10 seconds for late samples to be aggregated....");
-		this.wait(10000);
+		/*log.warn("Giving 10 seconds for late samples to be aggregated....");
+		this.wait(10000);*/
 		String aggregateVehiclesTravelTime = null;
 		if(numVehicles > 0) {
 			log.info("Creating the packet and resetting the counters...");
@@ -120,12 +120,12 @@ public class Linkx {
 			resetAggregateTotalVehiclesTravelTime();
 		}
 		//wake up other thread
-		log.info("{}",currentDate);
+		/*log.info("{}",currentDate);
 		if(currentDate.isEqual(finalDate) || (currentDate.isAfter(finalDate)
 				&& finalDate.isBefore(finalDate.plusSeconds(10)))){
 			log.warn("Allowing the processing of the borderline sample...");
 			check = true;
-		}
+		}*/
 		updateFinalDate();
 		this.notify();
 		return aggregateVehiclesTravelTime;

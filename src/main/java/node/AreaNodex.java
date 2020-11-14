@@ -6,6 +6,7 @@ import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.RoutingType;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.*;
+import org.apache.activemq.artemis.shaded.org.jgroups.blocks.cs.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.format.DateTimeFormatter;
@@ -34,10 +35,10 @@ public abstract class AreaNodex {
 		this.urlOut = urlOut;
 		this.links = new Links();
 		multipleNorthboundQueues = multipleQueues;
+		this.scala = scala;
 		createConsumer();
 		setHandler(createMessageHandler());
 		setQueueListener();
-		this.scala = scala;
 	}
 
 	public void addLink(Linkx link) {
@@ -62,6 +63,8 @@ public abstract class AreaNodex {
 		}
 	}
 
+
+
 	public void createProducer(){
 		ClientSessionFactory factoryOut;
 		try{
@@ -78,10 +81,10 @@ public abstract class AreaNodex {
 				sessionOut.createQueue(new SimpleString("Northbound"), RoutingType.ANYCAST, new SimpleString("Northbound"), true);
 				producer = sessionOut.createProducer(new SimpleString("Northbound"));
 			}
-			AreaNodexSender sender = new AreaNodexSender(sessionOut, producer,links);
+			/*AreaNodexSender sender = new AreaNodexSender(sessionOut, producer,links);
 			ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 			long period = 3/scala;
-			executorService.scheduleAtFixedRate(sender,period,period, TimeUnit.MINUTES);
+			executorService.scheduleAtFixedRate(sender,period,period,TimeUnit.MINUTES);*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,6 +94,17 @@ public abstract class AreaNodex {
 		try {
 			consumer.setMessageHandler(handler);
 		} catch (ActiveMQException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void sendMessage(String messageBody){
+		ClientMessage msg;
+		try {
+			msg = sessionOut.createMessage(true);
+			msg.getBodyBuffer().writeString(messageBody);
+			producer.send(msg);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

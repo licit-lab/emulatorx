@@ -2,6 +2,7 @@ package node;
 
 import data.util.PacketGenerator;
 import link.Linkx;
+import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.apache.activemq.artemis.api.core.client.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,7 @@ public class SingleTravelTimeAreaNodex extends AreaNodex {
 	private static final Logger log = LoggerFactory.getLogger(SingleTravelTimeAreaNodex.class);
 
 	public SingleTravelTimeAreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues, int scala) {
-		super(urlIn, urlOut,areaName, multipleQueues, scala);
+		super(urlIn, urlOut, areaName, multipleQueues,scala);
 	}
 
 	@Override
