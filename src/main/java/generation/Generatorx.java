@@ -77,6 +77,9 @@ public class Generatorx extends Thread {
 				if(iterator.hasNext())
 					previousTime  = handleRecord(iterator.next(),previousTime,scala);
 			}
+			long fmillisDiff = timestampsDifference(finalTime, previousTime, scala);
+			log.info("Sleeping {} ms before sending final placeholder...", fmillisDiff);
+			Thread.sleep(fmillisDiff);
 			log.info("Sending final placeholder");
 			sendPlaceHolder();
 			log.info("Waiting 10 seconds to give time for the last aggregated packets to be sent by the area nodes"
