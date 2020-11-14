@@ -29,11 +29,11 @@ public class Generatorx extends Thread {
 	private final Logger log = LoggerFactory.getLogger(Generatorx.class);
 	private ClientSession session;
 	private int interval;
-	private LocalDateTime lastDate;
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	private Set<String> areaNames;
+	private String obsFilePath;
 
-	public Generatorx(HashMap<String, String> associations, String urlIn, int scala, String startTime,
+	public Generatorx(String obsFilePath,HashMap<String, String> associations, String urlIn, int scala, String startTime,
 					  int interval, Set<String> areaNames){
 		this.associations = associations;
 		this.scala = scala;
@@ -41,6 +41,7 @@ public class Generatorx extends Thread {
 		this.finalTime = this.startTime.plusMinutes(interval);
 		this.interval = interval;
 		this.areaNames = areaNames;
+		this.obsFilePath = obsFilePath;
 		ClientSessionFactory factory;
 		this.session = null;
 		try {
@@ -55,8 +56,6 @@ public class Generatorx extends Thread {
 	@Override
 	public void run() {
 		log.info("Launching the generator...");
-		SettingReader st = new SettingReader();
-		String obsFilePath = st.readElementFromFileXml("settings.xml", "Files", "observations");
 		try {
 			createAndSend(obsFilePath, scala, startTime);
 		} catch (InterruptedException e) {
@@ -64,10 +63,8 @@ public class Generatorx extends Thread {
 		}
 	}
 
-	private void createAndSend(String obsFilePath, int scala,
-							   LocalDateTime startTime) throws InterruptedException {
+	private void createAndSend(String obsFilePath, int scala, LocalDateTime startTime) throws InterruptedException {
 		LocalDateTime previousTime = startTime;
-		LocalDateTime firstTime, secondTime = null;
 		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get(obsFilePath));
@@ -76,14 +73,16 @@ public class Generatorx extends Thread {
 			Iterator<CSVRecord> iterator = csvParser.iterator();
 
 			while(iterator.hasNext()){
-				CSVRecord record = iterator.next();
-				previousTime = handleRecord(record,previousTime,scala);
+				previousTime = handleRecord(iterator.next(),previousTime,scala);
 				if(iterator.hasNext())
 					previousTime  = handleRecord(iterator.next(),previousTime,scala);
 			}
 			log.info("Sending final placeholder");
 			sendPlaceHolder();
+			log.info("Waiting 10 seconds to give time for the last aggregated packets to be sent by the area nodes"
+			+ " to the remote broker...");
 			Thread.sleep(10000);
+
 			/*for (CSVRecord r: csvParser){
 				currentTime = LocalDateTime.parse(r.get(3),formatter);
 				long millisDiff = timestampsDifference(previousTime, , scala);
@@ -105,7 +104,15 @@ public class Generatorx extends Thread {
 
 	private LocalDateTime handleRecord(CSVRecord record,LocalDateTime previousTime, int scala){
 		LocalDateTime currentTime = LocalDateTime.parse(record.get(3),formatter);
+		long millisDiff;
 		if(currentTime.isEqual(finalTime) || currentTime.isAfter(finalTime)){
+			long diff1 = timestampsDifference(previousTime, finalTime, scala);
+			log.info("Sleeping {} ms before sending the placeholder...",diff1);
+			try {
+				Thread.sleep(diff1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			log.info("Sending placeholder");
 			sendPlaceHolder();
 			Duration duration =  Duration.between(currentTime,finalTime);
@@ -113,9 +120,10 @@ public class Generatorx extends Thread {
 			int mul = (int) (diff/interval);
 			log.info("The multiplier is {}", mul);
 			mul++;
+			millisDiff = timestampsDifference(finalTime, currentTime, scala);
 			updateDates(mul);
-		}
-		long millisDiff = timestampsDifference(previousTime, currentTime, scala);
+		} else
+			millisDiff = timestampsDifference(previousTime, currentTime, scala);
 		log.info("Waiting {} ms before sending next sample",millisDiff);
 		try {
 			Thread.sleep(millisDiff); //Wait for a given scaled interval between two samples
