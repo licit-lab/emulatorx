@@ -58,6 +58,7 @@ public class RTAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNodex 
 	protected MessageHandler createMessageHandler() {
 		return msg -> {
 			try {
+				log.info("RTAggregateTravelTimeAreaNode is handling another sample...");
 				long linkId = msg.getLongProperty("linkid");
 				log.info("The link is the following {}", linkId);
 				RTLink link = (RTLink) super.links.getLink(linkId);

@@ -22,7 +22,7 @@ public class Linkx {
 	protected int intervallo;
 	protected double totalSampleSpeeds;
 	protected int numVehicles;
-	protected LocalDateTime startingDate, finalDate,currentDate;
+	protected LocalDateTime startingDate,finalDate,currentDate;
 	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	protected DescriptiveStatistics stats = null;
 

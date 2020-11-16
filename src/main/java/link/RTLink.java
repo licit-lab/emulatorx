@@ -21,6 +21,7 @@ public class RTLink extends Linkx {
 	}
 
 	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) throws InterruptedException {
+		log.info("Updating aggregated packet in RT solution...");
 		this.currentDate = receivedDate;
 		if(currentDate.isAfter(startingDate) && currentDate.isBefore(finalDate)){
 			if(lateSamples.size() != 0)

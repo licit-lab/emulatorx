@@ -30,7 +30,7 @@ public class STGenerator extends Generator {
 
 	@Override
 	public void run() {
-		log.info("Launching the generator...");
+		log.info("Launching the STGenerator...");
 		try {
 			createAndSend(obsFilePath, scala, startTime);
 		} catch (InterruptedException e) {

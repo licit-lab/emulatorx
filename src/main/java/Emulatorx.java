@@ -69,9 +69,11 @@ public class Emulatorx {
 
 		switch (type){
 			case "RT":
+				log.info("RT solution will be executed...");
 				handleRT(linkFilePath,interval,startDateTime,urlIn,urlOut,boolMultipleNorthboundQueues,scala,obsFilePath);
 				break;
 			case "ST":
+				log.info("ST solution will be executed...");
 				handleST(linkFilePath,interval,startDateTime,urlIn,urlOut,boolMultipleNorthboundQueues,scala,obsFilePath);
 				break;
 			default:

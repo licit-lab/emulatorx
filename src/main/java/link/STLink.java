@@ -15,20 +15,21 @@ public class STLink extends Linkx {
 	}
 
 	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) throws InterruptedException {
+		log.info("Updating aggregated packet in ST solution...");
 		this.currentDate = receivedDate;
 		numVehicles++;
 		assert stats != null;
 		stats.addValue(((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC);
 	}
 
-	public synchronized String getAggregateTotalVehiclesTravelTime() throws InterruptedException {
+	public synchronized String getAggregateTotalVehiclesTravelTime() {
 		String aggregateVehiclesTravelTime = null;
 		if(numVehicles > 0) {
 			log.info("Creating the packet and resetting the counters...");
 			log.info("Number of vehicles transited is {}", numVehicles);
 			double avgTravelTime = stats.getMean();
 			double sdTravelTime = stats.getStandardDeviation();
-			Duration d = Duration.between(startingDate, finalDate);
+			Duration d = Duration.between(startingDate,finalDate);
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
 					d, startingDate, finalDate);
 			resetAggregateTotalVehiclesTravelTime();
@@ -39,5 +40,9 @@ public class STLink extends Linkx {
 		mul++;
 		updateFinalDate(mul);
 		return aggregateVehiclesTravelTime;
+	}
+
+	public boolean isChanged(){
+		return numVehicles != 0;
 	}
 }

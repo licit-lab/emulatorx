@@ -24,7 +24,7 @@ public class RTGenerator extends Generator {
 
 	@Override
 	public void run() {
-		log.info("Launching the generator...");
+		log.info("Launching the RTGenerator...");
 		try {
 			createAndSend(obsFilePath, scala, startTime);
 		} catch (InterruptedException e) {
