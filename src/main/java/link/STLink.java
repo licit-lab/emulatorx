@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class STLink extends Linkx {
+public class STLink extends Link {
 	private static final Logger log = LoggerFactory.getLogger(STLink.class);
 
 	public STLink(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber, String areaname, String name, String geom, int intervallo, String startingDate) {

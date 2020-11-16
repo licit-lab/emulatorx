@@ -1,6 +1,6 @@
 package node;
 
-import link.Linkx;
+import link.Link;
 import link.RTLink;
 import org.apache.activemq.artemis.api.core.RoutingType;
 import org.apache.activemq.artemis.api.core.SimpleString;
@@ -49,7 +49,7 @@ public class RTAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNodex 
 	}
 
 	@Override
-	public void addLink(Linkx link) {
+	public void addLink(Link link) {
 		this.links.addLink(link);
 	}
 

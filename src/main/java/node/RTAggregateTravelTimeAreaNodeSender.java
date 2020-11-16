@@ -33,17 +33,12 @@ public class RTAggregateTravelTimeAreaNodeSender extends Thread {
 		for(Long linkId: linkIds){
 			RTLink l = (RTLink) links.getLinks().get(linkId);
 			log.info("Sending messages for link {}",linkId);
-			String msg = null;
 			try {
-				msg = l.getAggregateTotalVehiclesTravelTime();
+				if(l.isChanged())
+					sendMessage(l.getAggregateTotalVehiclesTravelTime());;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			log.info("MSG = {}", msg);
-			if(msg != null)
-				sendMessage(msg);
-			else
-				log.info("No message has been sent");
 		}
 	}
 

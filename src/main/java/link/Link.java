@@ -7,12 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-public class Linkx {
+public class Link {
 	protected long linkId;
 	protected float length;
 	protected int ffs,speedlimit,frc,netclass,fow;
@@ -29,9 +28,9 @@ public class Linkx {
 	protected static final double FACTOR_M2KM = 0.001;
 	protected static final double FACTORH_2SEC = 3600;
 
-	private static final Logger log = LoggerFactory.getLogger(Linkx.class);
+	private static final Logger log = LoggerFactory.getLogger(Link.class);
 
-	public Linkx(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
+	public Link(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
 				String areaname, String name, String geom, int intervallo, String startingDate) {
 		this.linkId = id;
 		this.length = length;
@@ -178,4 +177,8 @@ public class Linkx {
 		Packet p = new Packet(this.linkId, list);
 		return new Gson().toJson(p);
 	}*/
+
+	public boolean isChanged(){
+		return numVehicles != 0;
+	}
 }

@@ -1,7 +1,7 @@
 import generation.Generator;
 import generation.RTGenerator;
 import generation.STGenerator;
-import link.Linkx;
+import link.Link;
 import link.RTLink;
 import link.STLink;
 import node.*;
@@ -93,7 +93,7 @@ public class Emulatorx {
 			for (CSVRecord r: csvParser){
 				//Creating area node and associating links
 				RTAggregateTravelTimeAreaNode an = null;
-				Linkx link = new RTLink(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
+				Link link = new RTLink(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")), Integer.parseInt(r.get("frc")),
 						Integer.parseInt(r.get("netclass")), Integer.parseInt(r.get("fow")),
 						r.get("routenumber"),r.get("areaname"),r.get("name"),r.get("geom"),
@@ -137,7 +137,7 @@ public class Emulatorx {
 			for (CSVRecord r: csvParser){
 				//Creating area node and associating links
 				STAggregateTravelTimeAreaNode an = null;
-				Linkx link = new STLink(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
+				Link link = new STLink(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")), Integer.parseInt(r.get("frc")),
 						Integer.parseInt(r.get("netclass")), Integer.parseInt(r.get("fow")),
 						r.get("routenumber"),r.get("areaname"),r.get("name"),r.get("geom"),

@@ -1,18 +1,14 @@
 package node;
 
 import link.Links;
-import link.Linkx;
+import link.Link;
 import org.apache.activemq.artemis.api.core.ActiveMQException;
 import org.apache.activemq.artemis.api.core.RoutingType;
 import org.apache.activemq.artemis.api.core.SimpleString;
 import org.apache.activemq.artemis.api.core.client.*;
-import org.apache.activemq.artemis.shaded.org.jgroups.blocks.cs.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 public abstract class AreaNodex {
@@ -41,7 +37,7 @@ public abstract class AreaNodex {
 		setQueueListener();
 	}
 
-	public void addLink(Linkx link) {
+	public void addLink(Link link) {
 		this.links.addLink(link);
 	}
 

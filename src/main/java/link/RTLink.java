@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class RTLink extends Linkx {
+public class RTLink extends Link {
 	private static final Logger log = LoggerFactory.getLogger(RTLink.class);
 	private boolean check = false;
 	private Queue<LateSample> lateSamples;

@@ -4,7 +4,7 @@
             <numberOfThreads>5</numberOfThreads>
     </generator>
     <emulator>
-        <type>ST</type>
+        <type>RT</type>
     </emulator>
     <areaNode>
     	<sensorType>2</sensorType>
