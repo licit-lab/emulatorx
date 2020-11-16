@@ -1,7 +1,7 @@
 package node;
 
 import link.Links;
-import link.Linkx;
+import link.RTLink;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
 import org.apache.activemq.artemis.api.core.client.ClientProducer;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
@@ -10,19 +10,19 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
-public class AreaNodexSender extends Thread {
+public class RTAggregateTravelTimeAreaNodeSender extends Thread {
 	private ClientProducer producer;
 	private ClientSession session;
 	private Links links;
-	private static final Logger log = LoggerFactory.getLogger(AreaNodexSender.class);
+	private static final Logger log = LoggerFactory.getLogger(RTAggregateTravelTimeAreaNodeSender.class);
 
-	public AreaNodexSender(ClientSession session, ClientProducer producer, Links links){
+	public RTAggregateTravelTimeAreaNodeSender(ClientSession session, ClientProducer producer, Links links){
 		this.producer = producer;
 		this.session = session;
 		this.links = links;
 	}
 
-	public AreaNodexSender(){
+	public RTAggregateTravelTimeAreaNodeSender(){
 
 	}
 
@@ -31,7 +31,7 @@ public class AreaNodexSender extends Thread {
 		log.info("Sending messages northbound...");
 		Set<Long> linkIds = links.getLinks().keySet();
 		for(Long linkId: linkIds){
-			Linkx l = links.getLinks().get(linkId);
+			RTLink l = (RTLink) links.getLinks().get(linkId);
 			log.info("Sending messages for link {}",linkId);
 			String msg = null;
 			try {

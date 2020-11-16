@@ -1,51 +1,70 @@
 package node;
 
+import link.Links;
 import link.Linkx;
-import org.apache.activemq.artemis.api.core.client.ClientSession;
-import org.apache.activemq.artemis.api.core.client.MessageHandler;
+import org.apache.activemq.artemis.api.core.ActiveMQException;
+import org.apache.activemq.artemis.api.core.RoutingType;
+import org.apache.activemq.artemis.api.core.SimpleString;
+import org.apache.activemq.artemis.api.core.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.time.format.DateTimeFormatter;
 
-import java.time.LocalDateTime;
-import java.util.Set;
-
-public class AggregateTravelTimeAreaNodex extends AreaNodex {
+public abstract class AggregateTravelTimeAreaNodex {
 	private static final Logger log = LoggerFactory.getLogger(AggregateTravelTimeAreaNodex.class);
+	protected String areaName;
+	protected ClientConsumer consumer;
+	protected ClientSession sessionOut;
+	protected ClientProducer producer;
+	protected MessageHandler handler;
+	protected boolean multipleNorthboundQueues;
+	protected String urlIn;
+	protected String urlOut;
+	protected Links links;
+	protected int scala;
+	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 	public AggregateTravelTimeAreaNodex(String urlIn, String urlOut, String areaName, boolean multipleQueues, int scala) {
-		super(urlIn, urlOut, areaName, multipleQueues,scala);
+		this.areaName = areaName;
+		this.urlIn = urlIn;
+		this.urlOut = urlOut;
+		this.links = new Links();
+		multipleNorthboundQueues = multipleQueues;
+		this.scala = scala;
+		createConsumer();
+		setHandler(createMessageHandler());
+		setQueueListener();
 	}
 
-	@Override
-	protected MessageHandler createMessageHandler() {
-		return msg -> {
-			try {
-				if(msg.getBooleanProperty("placeholder")){
-					log.info("It's a placeholder sample, sending the aggregate packet if at least a vehicle has transited");
-					Set<Long> keySet = super.links.getLinks().keySet();
-					for(Long l: keySet){
-						Linkx link = super.links.getLinks().get(l);
-						String packet = link.getAggregateTotalVehiclesTravelTime();
-						if(packet != null)
-							super.sendMessage(packet);
-					}
-				}
-				else{
-					long linkId = msg.getLongProperty("linkid");
-					log.info("The link is the following {}", linkId);
-					Linkx link = super.links.getLink(linkId);
-					log.info("A new speed reading is about to be processed... ");
-					log.info("The speed reading refers to link {}", linkId);
-					log.info("The speed reading timestamp is {}",msg.getStringProperty("timestamp"));
-					//Update link
-					link.updateAggregateTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
-							msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
-				}
-				msg.individualAcknowledge();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		};
+	public void addLink(Linkx link) {
+		this.links.addLink(link);
 	}
 
+	private void setHandler(MessageHandler handler) {
+		this.handler = handler;
+	}
+
+	private void createConsumer() {
+		ClientSessionFactory factoryIn;
+		try {
+			ServerLocator locatorIn = ActiveMQClient.createServerLocator(urlIn);
+			factoryIn = locatorIn.createSessionFactory();
+			ClientSession sessionIn = factoryIn.createSession(true, true);
+			sessionIn.createQueue(new SimpleString(areaName), RoutingType.ANYCAST, new SimpleString(areaName), true);
+			consumer = sessionIn.createConsumer(areaName);
+			sessionIn.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void setQueueListener() {
+		try {
+			consumer.setMessageHandler(handler);
+		} catch (ActiveMQException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected abstract MessageHandler createMessageHandler() ;
 }

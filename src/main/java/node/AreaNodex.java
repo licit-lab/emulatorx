@@ -81,7 +81,7 @@ public abstract class AreaNodex {
 				sessionOut.createQueue(new SimpleString("Northbound"), RoutingType.ANYCAST, new SimpleString("Northbound"), true);
 				producer = sessionOut.createProducer(new SimpleString("Northbound"));
 			}
-			/*AreaNodexSender sender = new AreaNodexSender(sessionOut, producer,links);
+			/*RTAggregateTravelTimeAreaNodeSender sender = new RTAggregateTravelTimeAreaNodeSender(sessionOut, producer,links);
 			ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 			long period = 3/scala;
 			executorService.scheduleAtFixedRate(sender,period,period,TimeUnit.MINUTES);*/

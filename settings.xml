@@ -3,6 +3,9 @@
             <scala>1</scala>
             <numberOfThreads>5</numberOfThreads>
     </generator>
+    <emulator>
+        <type>ST</type>
+    </emulator>
     <areaNode>
     	<sensorType>2</sensorType>
     	<!-- 0 = SINGLETRAVELTIME

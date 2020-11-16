@@ -13,22 +13,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class Linkx {
-	private long linkId;
-	private float length;
-	private int ffs,speedlimit,frc,netclass,fow;
-	private String routenumber,areaname,name;
-	private double totalTravelTime;
-	private float[][] geom;
-	private int intervallo;
-	private double totalSampleSpeeds;
-	private int numVehicles;
-	private LocalDateTime startingDate, finalDate,currentDate;
-	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-	private DescriptiveStatistics stats = null;
-	private boolean check = false;
+	protected long linkId;
+	protected float length;
+	protected int ffs,speedlimit,frc,netclass,fow;
+	protected String routenumber,areaname,name;
+	protected double totalTravelTime;
+	protected float[][] geom;
+	protected int intervallo;
+	protected double totalSampleSpeeds;
+	protected int numVehicles;
+	protected LocalDateTime startingDate, finalDate,currentDate;
+	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+	protected DescriptiveStatistics stats = null;
 
-	private static final double FACTOR_M2KM = 0.001;
-	private static final double FACTORH_2SEC = 3600;
+	protected static final double FACTOR_M2KM = 0.001;
+	protected static final double FACTORH_2SEC = 3600;
 
 	private static final Logger log = LoggerFactory.getLogger(Linkx.class);
 
@@ -53,7 +52,7 @@ public class Linkx {
 		getStats();
 	}
 
-	private void getStats(){
+	protected void getStats(){
 		if(this.stats == null)
 			this.stats = new DescriptiveStatistics();
 	}
@@ -61,16 +60,17 @@ public class Linkx {
 	/*
 	Set the interval for computing average
 	 */
-	private void setIntervalBounds(String startingDate) {
+	protected void setIntervalBounds(String startingDate) {
 		this.startingDate = LocalDateTime.parse(startingDate,formatter);
 		log.info("Starting date is {}", this.startingDate.toString());
 		this.finalDate = this.startingDate.plusMinutes(intervallo);
 		log.info("Ending date is {}", this.finalDate.toString());
 	}
 
-	private void updateFinalDate(){
-		this.startingDate = finalDate;
-		this.finalDate = this.finalDate.plusMinutes(intervallo);
+
+	protected void updateFinalDate(int mul){
+		this.startingDate = this.startingDate.plusMinutes(intervallo*mul);
+		this.finalDate = this.startingDate.plusMinutes(intervallo);
 	}
 
 	private void setGeomFromString(String s) {
@@ -83,52 +83,10 @@ public class Linkx {
 		}
 	}
 
-	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) throws InterruptedException {
-		/*this.currentDate = receivedDate;
-		if(currentDate.isEqual(finalDate) || (currentDate.isAfter(finalDate)
-				&& finalDate.isBefore(finalDate.plusSeconds(10)))){
-			log.warn("This sample has a timestamp around the interval limit, so I will wait...");
-			while(!check) {
-				log.warn("Waiting 10 seconds...");
-				this.wait(10000);
-			}
-			check = false;
-		}*/
-		numVehicles++;
-		assert stats != null;
-		stats.addValue(((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC);
-		notify();
-	}
 
-	private void resetAggregateTotalVehiclesTravelTime(){
+	protected void resetAggregateTotalVehiclesTravelTime(){
 		numVehicles = 0;
 		stats.clear();
-	}
-
-	public synchronized String getAggregateTotalVehiclesTravelTime() throws InterruptedException {
-		/*log.warn("Giving 10 seconds for late samples to be aggregated....");
-		this.wait(10000);*/
-		String aggregateVehiclesTravelTime = null;
-		if(numVehicles > 0) {
-			log.info("Creating the packet and resetting the counters...");
-			log.info("Number of vehicles transited is {}", numVehicles);
-			double avgTravelTime = stats.getMean();
-			double sdTravelTime = stats.getStandardDeviation();
-			Duration d = Duration.between(startingDate, finalDate);
-			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
-					d, startingDate, finalDate);
-			resetAggregateTotalVehiclesTravelTime();
-		}
-		//wake up other thread
-		/*log.info("{}",currentDate);
-		if(currentDate.isEqual(finalDate) || (currentDate.isAfter(finalDate)
-				&& finalDate.isBefore(finalDate.plusSeconds(10)))){
-			log.warn("Allowing the processing of the borderline sample...");
-			check = true;
-		}*/
-		updateFinalDate();
-		this.notify();
-		return aggregateVehiclesTravelTime;
 	}
 
 	public String computeTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) {
