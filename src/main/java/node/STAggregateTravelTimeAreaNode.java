@@ -62,8 +62,9 @@ public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNodex 
 					log.info("The speed reading refers to link {}", linkId);
 					log.info("The speed reading timestamp is {}",msg.getStringProperty("timestamp"));
 					//Update link
-					link.updateAggregateTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
-							msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
+					if(msg.getFloatProperty("coverage") != 0)
+						link.updateAggregateTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
+								msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
 				}
 				msg.individualAcknowledge();
 			} catch (Exception e) {

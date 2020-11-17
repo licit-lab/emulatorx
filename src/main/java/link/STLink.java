@@ -19,7 +19,11 @@ public class STLink extends Link {
 		this.currentDate = receivedDate;
 		numVehicles++;
 		assert stats != null;
-		stats.addValue(((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC);
+		log.warn("coverage is {}",coverage);
+		log.warn("sample speed is {}",sampleSpeed);
+		double v = ((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC;
+		log.warn("the value is {}",v);
+		stats.addValue(v);
 	}
 
 	public synchronized String getAggregateTotalVehiclesTravelTime() {
@@ -29,6 +33,10 @@ public class STLink extends Link {
 			log.info("Number of vehicles transited is {}", numVehicles);
 			double avgTravelTime = stats.getMean();
 			double sdTravelTime = stats.getStandardDeviation();
+			log.warn("Avg value {}",avgTravelTime);
+			log.warn("Numero {}",stats.getValues());
+			log.warn("Sd value {}",sdTravelTime);
+			log.warn("size {}",stats.getWindowSize());
 			Duration d = Duration.between(startingDate,finalDate);
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
 					d, startingDate, finalDate);
