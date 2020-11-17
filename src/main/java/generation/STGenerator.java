@@ -70,7 +70,7 @@ public class STGenerator extends Generator {
 	private LocalDateTime handleRecord(CSVRecord record,LocalDateTime previousTime, int scala){
 		LocalDateTime currentTime = LocalDateTime.parse(record.get(3),formatter);
 		long millisDiff;
-		if(currentTime.isEqual(finalTime) || currentTime.isAfter(finalTime)){
+		if(currentTime.isAfter(finalTime)){
 			long diff1 = timestampsDifference(previousTime, finalTime, scala);
 			log.info("Sleeping {} ms before sending the placeholder...",diff1);
 			try {
@@ -103,7 +103,7 @@ public class STGenerator extends Generator {
 	private void updateDates(int mul){
 		this.startTime = this.startTime.plusMinutes(interval*mul);
 		log.info("New startTime {}",startTime);
-		this.finalTime = this.startTime.plusMinutes(interval);
+		this.finalTime = this.startTime.plusMinutes(interval).minusSeconds(1);
 		log.info("New endTime {}",finalTime);
 	}
 

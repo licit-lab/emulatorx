@@ -62,14 +62,14 @@ public class Link {
 	protected void setIntervalBounds(String startingDate) {
 		this.startingDate = LocalDateTime.parse(startingDate,formatter);
 		log.info("Starting date is {}", this.startingDate.toString());
-		this.finalDate = this.startingDate.plusMinutes(intervallo);
+		this.finalDate = this.startingDate.plusMinutes(intervallo).minusSeconds(1);
 		log.info("Ending date is {}", this.finalDate.toString());
 	}
 
 
 	protected void updateFinalDate(int mul){
 		this.startingDate = this.startingDate.plusMinutes(intervallo*mul);
-		this.finalDate = this.startingDate.plusMinutes(intervallo);
+		this.finalDate = this.startingDate.plusMinutes(intervallo).minusSeconds(1);
 	}
 
 	private void setGeomFromString(String s) {

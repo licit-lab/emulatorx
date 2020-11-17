@@ -30,7 +30,7 @@ public class Generator extends Thread {
 		this.associations = associations;
 		this.scala = scala;
 		this.startTime = LocalDateTime.parse(startTime,formatter);
-		this.finalTime = this.startTime.plusMinutes(interval);
+		this.finalTime = this.startTime.plusMinutes(interval).minusSeconds(1);
 		this.interval = interval;
 		this.areaNames = areaNames;
 		this.obsFilePath = obsFilePath;

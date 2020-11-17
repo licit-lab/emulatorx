@@ -23,7 +23,8 @@ public class RTLink extends Link {
 	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) throws InterruptedException {
 		log.info("Updating aggregated packet in RT solution...");
 		this.currentDate = receivedDate;
-		if(currentDate.isAfter(startingDate) && currentDate.isBefore(finalDate)){
+		if((currentDate.isAfter(startingDate) && currentDate.isBefore(finalDate)) ||
+				currentDate.isEqual(startingDate) || currentDate.isEqual(finalDate)){
 			if(lateSamples.size() != 0)
 				for(int i = 0; i < lateSamples.size(); i++){
 					LateSample ls = lateSamples.remove();
