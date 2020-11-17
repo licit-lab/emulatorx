@@ -34,8 +34,9 @@ public class RTAggregateTravelTimeAreaNodeSender extends Thread {
 			RTLink l = (RTLink) links.getLinks().get(linkId);
 			log.info("Sending messages for link {}",linkId);
 			try {
-				if(l.isChanged())
-					sendMessage(l.getAggregateTotalVehiclesTravelTime());;
+				String packet = l.getAggregateTotalVehiclesTravelTime();
+				if(packet != null)
+					sendMessage(packet);;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

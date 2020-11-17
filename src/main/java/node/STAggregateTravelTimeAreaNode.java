@@ -47,10 +47,11 @@ public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNodex 
 				if(msg.getBooleanProperty("placeholder")){
 					log.info("It's a placeholder sample, sending the aggregate packet if at least a vehicle has transited");
 					Set<Long> keySet = super.links.getLinks().keySet();
-					for(Long l: keySet){
+					for(Long l: keySet) {
 						STLink link = (STLink) super.links.getLinks().get(l);
-						if(link.isChanged())
-							sendMessage(link.getAggregateTotalVehiclesTravelTime());
+						String packet = link.getAggregateTotalVehiclesTravelTime();
+						if (packet != null)
+							sendMessage(packet);
 					}
 				}
 				else{

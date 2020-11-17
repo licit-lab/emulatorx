@@ -34,15 +34,11 @@ public class STLink extends Link {
 					d, startingDate, finalDate);
 			resetAggregateTotalVehiclesTravelTime();
 		}
-		long diff = Math.abs(Duration.between(currentDate,finalDate).toMinutes());
+		/*long diff = Math.abs(Duration.between(currentDate,finalDate).toMinutes());
 		int mul = (int) (diff/intervallo);
 		log.info("The multiplier is {}", mul);
-		mul++;
-		updateFinalDate(mul);
+		mul++;*/
+		updateFinalDate(1);
 		return aggregateVehiclesTravelTime;
-	}
-
-	public boolean isChanged(){
-		return numVehicles != 0;
 	}
 }

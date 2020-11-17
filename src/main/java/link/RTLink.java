@@ -74,11 +74,11 @@ public class RTLink extends Link {
 			log.warn("Allowing the processing of the borderline sample...");
 			check = true;
 		}*/
-		long diff = Math.abs(Duration.between(currentDate,finalDate).toMinutes());
+		/*long diff = Math.abs(Duration.between(currentDate,finalDate).toMinutes());
 		int mul = (int) (diff/intervallo);
 		log.info("The multiplier is {}", mul);
-		mul++;
-		updateFinalDate(mul);
+		mul++;*/
+		updateFinalDate(1);
 		/*this.notify();*/
 		return aggregateVehiclesTravelTime;
 	}

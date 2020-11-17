@@ -177,8 +177,4 @@ public class Link {
 		Packet p = new Packet(this.linkId, list);
 		return new Gson().toJson(p);
 	}*/
-
-	public boolean isChanged(){
-		return numVehicles != 0;
-	}
 }
