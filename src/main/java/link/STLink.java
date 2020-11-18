@@ -20,10 +20,7 @@ public class STLink extends Link {
 		this.currentDateTime = receivedDateTime;
 		numVehicles++;
 		assert stats != null;
-		log.warn("coverage is {}",coverage);
-		log.warn("sample speed is {}",sampleSpeed);
 		double v = ((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC;
-		log.warn("the value is {}",v);
 		stats.addValue(v);
 	}
 
@@ -34,10 +31,6 @@ public class STLink extends Link {
 			log.info("Number of vehicles transited is {}", numVehicles);
 			double avgTravelTime = stats.getMean();
 			double sdTravelTime = stats.getStandardDeviation();
-			log.warn("Avg value {}",avgTravelTime);
-			log.warn("Numero {}",stats.getValues());
-			log.warn("Sd value {}",sdTravelTime);
-			log.warn("size {}",stats.getWindowSize());
 			Duration d = Duration.between(startDateTime, endDateTime);
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
 					d, startDateTime, endDateTime);
