@@ -15,16 +15,17 @@ public class RTLink extends Link {
 	private boolean check = false;
 	private Queue<LateSample> lateSamples;
 
-	public RTLink(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber, String areaname, String name, String geom, int intervallo, String startingDate) {
-		super(id, length, ffs, speedlimit, frc, netclass, fow, routenumber, areaname, name, geom, intervallo, startingDate);
+	public RTLink(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
+				  String areaname, String name, String geom, int intervallo, String startDateTime) {
+		super(id, length, ffs, speedlimit, frc, netclass, fow, routenumber, areaname, name, geom, intervallo, startDateTime);
 		this.lateSamples = new LinkedList<>();
 	}
 
-	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) throws InterruptedException {
+	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDateTime, float sampleSpeed, float coverage) throws InterruptedException {
 		log.info("Updating aggregated packet in RT solution...");
-		this.currentDate = receivedDate;
-		if((currentDate.isAfter(startingDate) && currentDate.isBefore(finalDate)) ||
-				currentDate.isEqual(startingDate) || currentDate.isEqual(finalDate)){
+		this.currentDateTime = receivedDateTime;
+		if((currentDateTime.isAfter(startDateTime) && currentDateTime.isBefore(endDateTime)) ||
+				currentDateTime.isEqual(startDateTime) || currentDateTime.isEqual(endDateTime)){
 			if(lateSamples.size() != 0)
 				for(int i = 0; i < lateSamples.size(); i++){
 					LateSample ls = lateSamples.remove();
@@ -34,11 +35,11 @@ public class RTLink extends Link {
 			numVehicles++;
 			assert stats != null;
 			stats.addValue(((coverage*length*FACTOR_M2KM)/sampleSpeed)*FACTORH_2SEC);
-		} else if(currentDate.isBefore(startingDate)){
+		} else if(currentDateTime.isBefore(startDateTime)){
 			log.warn("Packet arrived too late, so it will dropped");
-		} else if(currentDate.isAfter(finalDate)){
+		} else if(currentDateTime.isAfter(endDateTime)){
 			log.warn("Packet arrived too early, so it will be queued");
-			LateSample ls = new LateSample(receivedDate,sampleSpeed,coverage);
+			LateSample ls = new LateSample(receivedDateTime,sampleSpeed,coverage);
 			lateSamples.add(ls);
 		}
 		/*if(currentDate.isEqual(finalDate) || (currentDate.isAfter(finalDate)
@@ -63,9 +64,9 @@ public class RTLink extends Link {
 			log.info("Number of vehicles transited is {}", numVehicles);
 			double avgTravelTime = stats.getMean();
 			double sdTravelTime = stats.getStandardDeviation();
-			Duration d = Duration.between(startingDate, finalDate);
+			Duration d = Duration.between(startDateTime, endDateTime);
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
-					d, startingDate, finalDate);
+					d, startDateTime, endDateTime);
 			resetAggregateTotalVehiclesTravelTime();
 		}
 		//wake up other thread

@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class RTAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNodex {
+public class RTAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNode {
 	private static final Logger log = LoggerFactory.getLogger(RTAggregateTravelTimeAreaNode.class);
 
 	public RTAggregateTravelTimeAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues, int scala) {
@@ -66,8 +66,9 @@ public class RTAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNodex 
 				log.info("The speed reading refers to link {}", linkId);
 				log.info("The speed reading timestamp is {}",msg.getStringProperty("timestamp"));
 				//Update link
-				link.updateAggregateTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
-						msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
+				if(msg.getFloatProperty("coverage") != 0)
+					link.updateAggregateTotalVehiclesTravelTime(LocalDateTime.parse(msg.getStringProperty("timestamp"),formatter),
+							msg.getFloatProperty("speed"),msg.getFloatProperty("coverage"));
 				msg.individualAcknowledge();
 			} catch (Exception e) {
 				e.printStackTrace();

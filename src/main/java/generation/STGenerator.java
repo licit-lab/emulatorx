@@ -24,22 +24,22 @@ public class STGenerator extends Generator {
 	private final Logger log = LoggerFactory.getLogger(STGenerator.class);
 
 
-	public STGenerator(String obsFilePath, HashMap<String, String> associations, String urlIn, int scala, String startTime, int interval, Set<String> areaNames) {
-		super(obsFilePath, associations, urlIn, scala, startTime, interval, areaNames);
+	public STGenerator(String obsFilePath, HashMap<String, String> associations, String urlIn, int scala, String startDateTime, int interval, Set<String> areaNames) {
+		super(obsFilePath, associations, urlIn, scala, startDateTime, interval, areaNames);
 	}
 
 	@Override
 	public void run() {
 		log.info("Launching the STGenerator...");
 		try {
-			createAndSend(obsFilePath, scala, startTime);
+			createAndSend(obsFilePath, scala, startDateTime);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void createAndSend(String obsFilePath, int scala, LocalDateTime startTime) throws InterruptedException {
-		LocalDateTime previousTime = startTime;
+	private void createAndSend(String obsFilePath, int scala, LocalDateTime startDateTime) throws InterruptedException {
+		LocalDateTime previousDateTime = startDateTime;
 		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get(obsFilePath));
@@ -48,11 +48,11 @@ public class STGenerator extends Generator {
 			Iterator<CSVRecord> iterator = csvParser.iterator();
 
 			while(iterator.hasNext()){
-				previousTime = handleRecord(iterator.next(),previousTime,scala);
+				previousDateTime = handleRecord(iterator.next(),previousDateTime,scala);
 				if(iterator.hasNext())
-					previousTime  = handleRecord(iterator.next(),previousTime,scala);
+					previousDateTime  = handleRecord(iterator.next(),previousDateTime,scala);
 			}
-			long fmillisDiff = timestampsDifference(finalTime, previousTime, scala);
+			long fmillisDiff = timestampsDifference(endDateTime, previousDateTime, scala);
 			log.info("Sleeping {} ms before sending final placeholder...", fmillisDiff);
 			Thread.sleep(fmillisDiff);
 			log.info("Sending final placeholder");
@@ -67,11 +67,11 @@ public class STGenerator extends Generator {
 		}
 	}
 
-	private LocalDateTime handleRecord(CSVRecord record,LocalDateTime previousTime, int scala){
-		LocalDateTime currentTime = LocalDateTime.parse(record.get(3),formatter);
+	private LocalDateTime handleRecord(CSVRecord record,LocalDateTime previousDateTime, int scala){
+		LocalDateTime currentDateTime = LocalDateTime.parse(record.get(3),formatter);
 		long millisDiff;
-		if(currentTime.isAfter(finalTime)){
-			long diff1 = timestampsDifference(previousTime, finalTime, scala);
+		if(currentDateTime.isAfter(endDateTime)){
+			long diff1 = timestampsDifference(previousDateTime, endDateTime, scala);
 			log.info("Sleeping {} ms before sending the placeholder...",diff1);
 			try {
 				Thread.sleep(diff1);
@@ -80,31 +80,31 @@ public class STGenerator extends Generator {
 			}
 			log.info("Sending placeholder");
 			sendPlaceHolder();
-			Duration duration =  Duration.between(currentTime,finalTime);
+			Duration duration =  Duration.between(currentDateTime, endDateTime);
 			long diff = Math.abs(duration.toMinutes());
 			int mul = (int) (diff/interval);
 			log.info("The multiplier is {}", mul);
 			mul++;
-			millisDiff = super.timestampsDifference(finalTime, currentTime, scala);
+			millisDiff = super.timestampsDifference(endDateTime, currentDateTime, scala);
 			updateDates(mul);
 		} else
-			millisDiff = timestampsDifference(previousTime, currentTime, scala);
+			millisDiff = timestampsDifference(previousDateTime, currentDateTime, scala);
 		log.info("Waiting {} ms before sending next sample",millisDiff);
 		try {
 			Thread.sleep(millisDiff); //Wait for a given scaled interval between two samples
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		previousTime = currentTime;
+		previousDateTime = currentDateTime;
 		sendSample(record);
-		return previousTime;
+		return previousDateTime;
 	}
 
 	private void updateDates(int mul){
-		this.startTime = this.startTime.plusMinutes(interval*mul);
-		log.info("New startTime {}",startTime);
-		this.finalTime = this.startTime.plusMinutes(interval).minusSeconds(1);
-		log.info("New endTime {}",finalTime);
+		this.startDateTime = this.startDateTime.plusMinutes(interval*mul);
+		log.info("New startTime {}", startDateTime);
+		this.endDateTime = this.startDateTime.plusMinutes(interval).minusSeconds(1);
+		log.info("New endTime {}", endDateTime);
 	}
 
 	private void sendPlaceHolder(){

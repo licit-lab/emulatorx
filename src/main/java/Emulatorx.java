@@ -42,8 +42,8 @@ public class Emulatorx {
 		log.info("Broker out: " + urlOut);
 
 		//Setting interval and starting DateTime
-		String interval = st.readElementFromFileXml("settings.xml", "Link", "intervallo");
-		String startDateTime = st.readElementFromFileXml("settings.xml", "Link", "startTime");
+		String interval = st.readElementFromFileXml("settings.xml", "Link", "interval");
+		String startDateTime = st.readElementFromFileXml("settings.xml", "Link", "startDateTime");
 		log.info("Interval is set at: " + interval);
 		log.info("StartingDateTime is set at: " + startDateTime);
 

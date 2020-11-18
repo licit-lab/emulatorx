@@ -21,7 +21,7 @@ public class Link {
 	protected int intervallo;
 	protected double totalSampleSpeeds;
 	protected int numVehicles;
-	protected LocalDateTime startingDate,finalDate,currentDate;
+	protected LocalDateTime startDateTime, endDateTime, currentDateTime;
 	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 	protected DescriptiveStatistics stats = null;
 
@@ -31,7 +31,7 @@ public class Link {
 	private static final Logger log = LoggerFactory.getLogger(Link.class);
 
 	public Link(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
-				String areaname, String name, String geom, int intervallo, String startingDate) {
+				String areaname, String name, String geom, int intervallo, String startDateTime) {
 		this.linkId = id;
 		this.length = length;
 		this.ffs = ffs;
@@ -46,7 +46,7 @@ public class Link {
 		this.intervallo = intervallo;
 		totalSampleSpeeds = 0;
 		numVehicles = 0;
-		setIntervalBounds(startingDate);
+		setIntervalBounds(startDateTime);
 		totalTravelTime = 0;
 		getStats();
 	}
@@ -59,17 +59,17 @@ public class Link {
 	/*
 	Set the interval for computing average
 	 */
-	protected void setIntervalBounds(String startingDate) {
-		this.startingDate = LocalDateTime.parse(startingDate,formatter);
-		log.info("Starting date is {}", this.startingDate.toString());
-		this.finalDate = this.startingDate.plusMinutes(intervallo).minusSeconds(1);
-		log.info("Ending date is {}", this.finalDate.toString());
+	protected void setIntervalBounds(String startDateTime) {
+		this.startDateTime = LocalDateTime.parse(startDateTime,formatter);
+		log.info("Starting date is {}", this.startDateTime.toString());
+		this.endDateTime = this.startDateTime.plusMinutes(intervallo).minusSeconds(1);
+		log.info("Ending date is {}", this.endDateTime.toString());
 	}
 
 
 	protected void updateFinalDate(int mul){
-		this.startingDate = this.startingDate.plusMinutes(intervallo*mul);
-		this.finalDate = this.startingDate.plusMinutes(intervallo).minusSeconds(1);
+		this.startDateTime = this.startDateTime.plusMinutes(intervallo*mul);
+		this.endDateTime = this.startDateTime.plusMinutes(intervallo).minusSeconds(1);
 	}
 
 	private void setGeomFromString(String s) {
@@ -90,11 +90,11 @@ public class Link {
 
 	public String computeTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) {
 		String totalVehiclesTravelTime = null;
-		if(receivedDate.isAfter(finalDate)){
+		if(receivedDate.isAfter(endDateTime)){
 			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
 			log.info("Number of vehicles transited is {}", numVehicles);
 			log.info("Total travel time amounts to {}", totalTravelTime);
-			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimeSample(getId(),totalTravelTime,numVehicles,startingDate,finalDate);
+			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimeSample(getId(),totalTravelTime,numVehicles, startDateTime, endDateTime);
 			totalSampleSpeeds = 0;
 			numVehicles = 0;
 			totalTravelTime = 0;
@@ -106,10 +106,10 @@ public class Link {
 			mul++;
 			this.finalDate = finalDate.plusMinutes(mul*intervallo);
 			this.startingDate = finalDate.minusMinutes(intervallo);*/
-			this.startingDate = receivedDate;
-			this.finalDate = receivedDate.plusMinutes(intervallo);
-			log.info("New starting date is {}", startingDate.toString());
-			log.info("New final date is {}", finalDate.toString());
+			this.startDateTime = receivedDate;
+			this.endDateTime = receivedDate.plusMinutes(intervallo);
+			log.info("New starting date is {}", startDateTime.toString());
+			log.info("New final date is {}", endDateTime.toString());
 		}
 		numVehicles++;
 		totalSampleSpeeds = totalSampleSpeeds + sampleSpeed;

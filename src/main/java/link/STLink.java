@@ -10,13 +10,14 @@ import java.time.LocalDateTime;
 public class STLink extends Link {
 	private static final Logger log = LoggerFactory.getLogger(STLink.class);
 
-	public STLink(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber, String areaname, String name, String geom, int intervallo, String startingDate) {
-		super(id, length, ffs, speedlimit, frc, netclass, fow, routenumber, areaname, name, geom, intervallo, startingDate);
+	public STLink(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
+				  String areaname, String name, String geom, int intervallo, String startDateTime) {
+		super(id, length, ffs, speedlimit, frc, netclass, fow, routenumber, areaname, name, geom, intervallo, startDateTime);
 	}
 
-	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDate, float sampleSpeed, float coverage) throws InterruptedException {
+	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDateTime, float sampleSpeed, float coverage) throws InterruptedException {
 		log.info("Updating aggregated packet in ST solution...");
-		this.currentDate = receivedDate;
+		this.currentDateTime = receivedDateTime;
 		numVehicles++;
 		assert stats != null;
 		log.warn("coverage is {}",coverage);
@@ -37,9 +38,9 @@ public class STLink extends Link {
 			log.warn("Numero {}",stats.getValues());
 			log.warn("Sd value {}",sdTravelTime);
 			log.warn("size {}",stats.getWindowSize());
-			Duration d = Duration.between(startingDate,finalDate);
+			Duration d = Duration.between(startDateTime, endDateTime);
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
-					d, startingDate, finalDate);
+					d, startDateTime, endDateTime);
 			resetAggregateTotalVehiclesTravelTime();
 		}
 		/*long diff = Math.abs(Duration.between(currentDate,finalDate).toMinutes());

@@ -19,9 +19,9 @@
    
     </areaNode>
     <Link>
-    	<intervallo>3</intervallo>
+    	<interval>3</interval>
         <!-- in minuti -->
-    	<startTime>06/09/2018 00:00:00</startTime>
+    	<startDateTime>06/09/2018 00:00:00</startDateTime>
     	<msgType>3</msgType>
     	<!-- 0 = false, 1 = true -->
     </Link>

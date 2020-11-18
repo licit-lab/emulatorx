@@ -18,34 +18,34 @@ public class RTGenerator extends Generator {
 	private final Logger log = LoggerFactory.getLogger(RTGenerator.class);
 
 
-	public RTGenerator(String obsFilePath, HashMap<String, String> associations, String urlIn, int scala, String startTime, int interval, Set<String> areaNames) {
-		super(obsFilePath, associations, urlIn, scala, startTime, interval, areaNames);
+	public RTGenerator(String obsFilePath, HashMap<String, String> associations, String urlIn, int scala, String startDateTime, int interval, Set<String> areaNames) {
+		super(obsFilePath, associations, urlIn, scala, startDateTime, interval, areaNames);
 	}
 
 	@Override
 	public void run() {
 		log.info("Launching the RTGenerator...");
 		try {
-			createAndSend(obsFilePath, scala, startTime);
+			createAndSend(obsFilePath, scala, startDateTime);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void createAndSend(String obsFilePath, int scala, LocalDateTime startTime) throws InterruptedException {
-		LocalDateTime previousTime = startTime;
+	private void createAndSend(String obsFilePath, int scala, LocalDateTime startDateTime) throws InterruptedException {
+		LocalDateTime previousDateTime = startDateTime;
 		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get(obsFilePath));
 			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
 			CSVParser csvParser = csvFormat.parse(reader);
-			LocalDateTime currentTime;
+			LocalDateTime currentDateTime;
 			for (CSVRecord r: csvParser) {
-				currentTime = LocalDateTime.parse(r.get(3), formatter);
-				long millisDiff = timestampsDifference(previousTime, currentTime, scala);
+				currentDateTime = LocalDateTime.parse(r.get(3), formatter);
+				long millisDiff = timestampsDifference(previousDateTime, currentDateTime, scala);
 				log.info("Waiting {} ms before sending next sample", millisDiff);
 				Thread.sleep(millisDiff); //Wait for a given scaled interval between two samples
-				previousTime = currentTime;
+				previousDateTime = currentDateTime;
 				sendSample(r);
 			}
 		} catch (IOException e) {

@@ -3,22 +3,22 @@ package util;
 import java.time.LocalDateTime;
 
 public class LateSample {
-	private LocalDateTime receivedDate;
+	private LocalDateTime receivedDateTime;
 	private float sampleSpeed;
 	private float coverage;
 
-	public LateSample(LocalDateTime receivedDate, float sampleSpeed, float coverage){
-		this.receivedDate = receivedDate;
+	public LateSample(LocalDateTime receivedDateTime, float sampleSpeed, float coverage){
+		this.receivedDateTime = receivedDateTime;
 		this.sampleSpeed = sampleSpeed;
 		this.coverage = coverage;
 	}
 
-	public LocalDateTime getReceivedDate() {
-		return receivedDate;
+	public LocalDateTime getReceivedDateTime() {
+		return receivedDateTime;
 	}
 
-	public void setReceivedDate(LocalDateTime receivedDate) {
-		this.receivedDate = receivedDate;
+	public void setReceivedDateTime(LocalDateTime receivedDateTime) {
+		this.receivedDateTime = receivedDateTime;
 	}
 
 	public float getSampleSpeed() {

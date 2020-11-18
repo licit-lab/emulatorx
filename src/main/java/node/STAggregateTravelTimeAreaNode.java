@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNodex {
+public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNode {
 	private static final Logger log = LoggerFactory.getLogger(STAggregateTravelTimeAreaNode.class);
 
 	public STAggregateTravelTimeAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues, int scala) {

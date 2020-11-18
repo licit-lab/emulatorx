@@ -15,8 +15,8 @@ import java.util.Set;
 
 public class Generator extends Thread {
 	protected int scala;
-	protected LocalDateTime startTime;
-	protected LocalDateTime finalTime;
+	protected LocalDateTime startDateTime;
+	protected LocalDateTime endDateTime;
 	protected HashMap<String, String> associations; //It maintains associations between links and areas
 	private final Logger log = LoggerFactory.getLogger(Generator.class);
 	protected ClientSession session;
@@ -25,12 +25,12 @@ public class Generator extends Thread {
 	protected Set<String> areaNames;
 	protected String obsFilePath;
 
-	public Generator(String obsFilePath, HashMap<String, String> associations, String urlIn, int scala, String startTime,
+	public Generator(String obsFilePath, HashMap<String, String> associations, String urlIn, int scala, String startDateTime,
 					 int interval, Set<String> areaNames){
 		this.associations = associations;
 		this.scala = scala;
-		this.startTime = LocalDateTime.parse(startTime,formatter);
-		this.finalTime = this.startTime.plusMinutes(interval).minusSeconds(1);
+		this.startDateTime = LocalDateTime.parse(startDateTime,formatter);
+		this.endDateTime = this.startDateTime.plusMinutes(interval).minusSeconds(1);
 		this.interval = interval;
 		this.areaNames = areaNames;
 		this.obsFilePath = obsFilePath;
@@ -45,8 +45,8 @@ public class Generator extends Thread {
 		}
 	}
 
-	protected long timestampsDifference(LocalDateTime previous, LocalDateTime current, int scala) {
-		return Math.abs(Duration.between(previous,current).toMillis()/scala);
+	protected long timestampsDifference(LocalDateTime previousDateTime, LocalDateTime currentDateTime, int scala) {
+		return Math.abs(Duration.between(previousDateTime,currentDateTime).toMillis()/scala);
 	}
 
 
