@@ -35,7 +35,7 @@ public class Emulatorx {
 		boolMultipleNorthboundQueues = Integer.parseInt(value) == 1 ;
 		log.info("MultipleNorthboundQueues has been set to: " + boolMultipleNorthboundQueues);
 
-		//Recoreving broker in and out URLs
+		//Recovering broker in and out URLs
 		String urlIn = st.readElementFromFileXml("settings.xml", "areaNode", "urlIn");
 		String urlOut = st.readElementFromFileXml("settings.xml", "areaNode", "urlOut");
 		log.info("Broker in: " + urlIn);
@@ -92,7 +92,7 @@ public class Emulatorx {
 			CSVParser csvParser = csvFormat.parse(reader);
 			for (CSVRecord r: csvParser){
 				//Creating area node and associating links
-				RTAggregateTravelTimeAreaNode an = null;
+				RTAggregateTravelTimeAreaNode an;
 				Link link = new RTLink(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length").replace(',','.')),
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")), Integer.parseInt(r.get("frc")),
 						Integer.parseInt(r.get("netclass")), Integer.parseInt(r.get("fow")),
