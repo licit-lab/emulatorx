@@ -22,23 +22,35 @@ public class TestCreator {
 	public static final String speed = "100";
 
 	public static void main(String[] args){
-		String links = "all_links.csv";
+		//String links = "all_links.csv";
 		String changedLinks = "prova.csv";
-		String testSamples = args[0];
+		String samples = args[0];
+		System.out.println(samples);
+		String links = args[1];
+		System.out.println(links);
+		System.out.println(args[2]);
 		try {
 			//TestCreator.setTopic(links,changedLinks);
-			BufferedWriter testSamplesWriter = Files.newBufferedWriter(Paths.get(testSamples));
 			BufferedReader reader = Files.newBufferedReader(Paths.get(changedLinks));
+			BufferedWriter samplesWriter = Files.newBufferedWriter(Paths.get(samples));
+			BufferedWriter linksWriter = Files.newBufferedWriter(Paths.get(links));
 			CSVFormat csvFormat = CSVFormat.DEFAULT.withDelimiter(';').withFirstRecordAsHeader();
 			CSVParser csvParser = csvFormat.parse(reader);
-			CSVPrinter csvPrinter = CSVFormat.DEFAULT.withDelimiter(';').withHeader("id","linkid","coverage","timestamp","speed").print(testSamplesWriter);
+			CSVPrinter csvPrinterSample = CSVFormat.DEFAULT.withDelimiter(';')
+					.withHeader("id","linkid","coverage","timestamp","speed").print(samplesWriter);
+			CSVPrinter csvPrinterLink = CSVFormat.DEFAULT.withDelimiter(';')
+					.withHeader("id","length","ffs","speedlimit","frc","netclass","fow","routenumber","areaname","name","geom").print(linksWriter);
 			Iterator<CSVRecord> iterator = csvParser.iterator();
-			for(int i = 0; i < Integer.parseInt(args[1]); i++){
+			for(int i = 0; i < Integer.parseInt(args[2]); i++){
 				CSVRecord r = iterator.next();
-				csvPrinter.printRecord(TestCreator.id,r.get("id"),TestCreator.coverage,TestCreator.timestamp,TestCreator.speed);
+				csvPrinterSample.printRecord(TestCreator.id,r.get("id"),TestCreator.coverage,TestCreator.timestamp,TestCreator.speed);
+				csvPrinterLink.printRecord(r.get("id"),r.get("length"),r.get("ffs"),r.get("speedlimit"),r.get("frc"),
+						r.get("netclass"),r.get("fow"),r.get("routenumber"),r.get("areaname"),r.get("name"),r.get("geom"));
 			}
-			csvPrinter.flush();
-			testSamplesWriter.close();
+			csvPrinterSample.flush();
+			samplesWriter.close();
+			csvPrinterLink.flush();
+			linksWriter.close();
 		}catch (Exception e){
 
 		}
