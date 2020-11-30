@@ -24,16 +24,16 @@ public class TestCreator {
 	public static void main(String[] args){
 		String links = "all_links.csv";
 		String changedLinks = "prova.csv";
-		String testSamples = "2test_samples.csv";
+		String testSamples = args[0];
 		try {
-			//TestCreator.setTopic(links,prova);
+			//TestCreator.setTopic(links,changedLinks);
 			BufferedWriter testSamplesWriter = Files.newBufferedWriter(Paths.get(testSamples));
 			BufferedReader reader = Files.newBufferedReader(Paths.get(changedLinks));
 			CSVFormat csvFormat = CSVFormat.DEFAULT.withDelimiter(';').withFirstRecordAsHeader();
 			CSVParser csvParser = csvFormat.parse(reader);
 			CSVPrinter csvPrinter = CSVFormat.DEFAULT.withDelimiter(';').withHeader("id","linkid","coverage","timestamp","speed").print(testSamplesWriter);
 			Iterator<CSVRecord> iterator = csvParser.iterator();
-			for(int i = 0; i < 1024; i++){
+			for(int i = 0; i < Integer.parseInt(args[1]); i++){
 				CSVRecord r = iterator.next();
 				csvPrinter.printRecord(TestCreator.id,r.get("id"),TestCreator.coverage,TestCreator.timestamp,TestCreator.speed);
 			}
