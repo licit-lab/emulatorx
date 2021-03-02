@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export TILLER_NAMESPACE=promenade
-
 cd ../helm-charts/activemq-artemis/activemq-artemis || exit
 
 helm delete artemis
