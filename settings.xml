@@ -14,8 +14,9 @@
     	<multipleNorthboundQueues>1</multipleNorthboundQueues>
     	<!-- 0 = false, 1 = true -->
     	<urlIn>tcp://localhost:61616</urlIn>
-    	
-    	<urlOut>tcp://137.121.170.248:30340</urlOut>
+
+        <urlOut>tcp://172.18.10.141:30340</urlOut>
+    	<!-- <urlOut>tcp://137.121.170.248:30340</urlOut> -->
    
     </areaNode>
     <Link>
@@ -26,7 +27,7 @@
     	<!-- 0 = false, 1 = true -->
     </Link>
     <Files>
-    	<links>all_links.csv</links>
-    	<observations>all_observations.csv</observations>
+    	<links>2links.csv</links>
+    	<observations>2test_samples.csv</observations>
     </Files>
 </settings>

@@ -5,7 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class STLink extends Link {
 	private static final Logger log = LoggerFactory.getLogger(STLink.class);
@@ -32,8 +34,11 @@ public class STLink extends Link {
 			double avgTravelTime = stats.getMean();
 			double sdTravelTime = stats.getStandardDeviation();
 			Duration d = Duration.between(startDateTime, endDateTime);
+			LocalDateTime aggregationDateTime = startDateTime.plus(d.dividedBy(2));
+			Instant instant = aggregationDateTime.atZone(ZoneId.systemDefault()).toInstant();
+			long aggregationTimestamp = instant.toEpochMilli();
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
-					d, startDateTime, endDateTime);
+					d, startDateTime, endDateTime, aggregationTimestamp);
 			resetAggregateTotalVehiclesTravelTime();
 		}
 		/*long diff = Math.abs(Duration.between(currentDate,finalDate).toMinutes());

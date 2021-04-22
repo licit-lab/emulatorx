@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-cd ../helm-charts/activemq-artemis/activemq-artemis || exit
+#cd ../helm-charts/activemq-artemis/activemq-artemis || exit
+#
+#helm delete artemis
+#
+#oc delete pvc data-artemis-activemq-artemis-master-0
+#
+#helm install artemis .
 
-helm delete artemis
-
-oc delete pvc data-artemis-activemq-artemis-master-0 
-
-helm install artemis .
-
-cd ../../../broker/ || exit
+cd ../broker/ || exit
 
 rm -rf mybroker
 
