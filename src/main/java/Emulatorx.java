@@ -97,7 +97,7 @@ public class Emulatorx {
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")),
 						Long.parseLong(r.get("from")),Long.parseLong(r.get("to")),
 						r.get("areaname"),r.get("name"),
-						r.get("geom"),
+						r.get("coordinates"),
 						Integer.parseInt(interval),
 						startDateTime);
 
@@ -142,7 +142,7 @@ public class Emulatorx {
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")),
 						Long.parseLong(r.get("from")),Long.parseLong(r.get("to")),
 						r.get("areaname"),r.get("name"),
-						r.get("geom"),
+						r.get("coordinates"),
 						Integer.parseInt(interval),
 						startDateTime);
 
