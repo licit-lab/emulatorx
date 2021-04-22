@@ -66,7 +66,7 @@ public class RTLink extends Link {
 			double sdTravelTime = stats.getStandardDeviation();
 			Duration d = Duration.between(startDateTime, endDateTime);
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), avgTravelTime, sdTravelTime, numVehicles,
-					d, startDateTime, endDateTime);
+					d, startDateTime, endDateTime,0);
 			resetAggregateTotalVehiclesTravelTime();
 		}
 		//wake up other thread
