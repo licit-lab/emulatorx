@@ -15,7 +15,7 @@
     	<!-- 0 = false, 1 = true -->
     	<urlIn>tcp://localhost:61616</urlIn>
 
-        <urlOut>tcp://172.18.10.141:30340</urlOut>
+        <urlOut>tcp://137.121.170.248:30340/</urlOut>
     	<!-- <urlOut>tcp://137.121.170.248:30340</urlOut> -->
    
     </areaNode>
@@ -27,7 +27,7 @@
     	<!-- 0 = false, 1 = true -->
     </Link>
     <Files>
-    	<links>2links.csv</links>
-    	<observations>2test_samples.csv</observations>
+    	<links>final_links.csv</links>
+    	<observations>final_all_observations.csv</observations>
     </Files>
 </settings>

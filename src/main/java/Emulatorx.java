@@ -88,7 +88,7 @@ public class Emulatorx {
 		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get(linkFilePath));
-			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
+			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(',');
 			CSVParser csvParser = csvFormat.parse(reader);
 			for (CSVRecord r: csvParser){
 				//Creating area node and associating links
@@ -133,7 +133,7 @@ public class Emulatorx {
 		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get(linkFilePath));
-			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
+			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(',');
 			CSVParser csvParser = csvFormat.parse(reader);
 			for (CSVRecord r: csvParser){
 				//Creating area node and associating links
