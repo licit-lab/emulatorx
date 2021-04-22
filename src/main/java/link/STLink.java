@@ -12,9 +12,9 @@ import java.time.ZoneId;
 public class STLink extends Link {
 	private static final Logger log = LoggerFactory.getLogger(STLink.class);
 
-	public STLink(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
-				  String areaname, String name, String geom, int intervallo, String startDateTime) {
-		super(id, length, ffs, speedlimit, frc, netclass, fow, routenumber, areaname, name, geom, intervallo, startDateTime);
+	public STLink(long id, float length, int ffs, int speedlimit, long from, long to,
+				  String areaname, String name, String coordinates, int intervallo, String startDateTime) {
+		super(id, length, ffs, speedlimit, from, to, areaname, name, coordinates, intervallo, startDateTime);
 	}
 
 	public synchronized void updateAggregateTotalVehiclesTravelTime(LocalDateTime receivedDateTime, float sampleSpeed, float coverage) throws InterruptedException {

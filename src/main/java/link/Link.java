@@ -12,10 +12,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class Link {
-	protected long linkId;
+	protected long linkId,from,to;
 	protected float length;
-	protected int ffs,speedlimit,frc,netclass,fow;
-	protected String routenumber,areaname,name;
+	protected int ffs,speedlimit;
+	protected String areaname,name,coordinates;
 	protected double totalTravelTime;
 	protected float[][] geom;
 	protected int intervallo;
@@ -30,19 +30,17 @@ public class Link {
 
 	private static final Logger log = LoggerFactory.getLogger(Link.class);
 
-	public Link(long id, float length, int ffs, int speedlimit, int frc, int netclass, int fow, String routenumber,
-				String areaname, String name, String geom, int intervallo, String startDateTime) {
+	public Link(long id, float length, int ffs, int speedlimit, long from, long to,
+				String areaname, String name, String coordinates, int intervallo, String startDateTime) {
 		this.linkId = id;
 		this.length = length;
 		this.ffs = ffs;
 		this.speedlimit = speedlimit;
-		this.frc = frc;
-		this.netclass = netclass;
-		this.fow = fow;
-		this.routenumber = routenumber;
+		this.from = from;
+		this.to = to;
+		this.coordinates = coordinates;
 		this.areaname = areaname;
 		this.name = name;
-		setGeomFromString(geom);
 		this.intervallo = intervallo;
 		totalSampleSpeeds = 0;
 		numVehicles = 0;
