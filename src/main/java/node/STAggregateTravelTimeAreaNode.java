@@ -78,6 +78,8 @@ public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNode {
 		try {
 			msg = sessionOut.createMessage(true);
 			msg.getBodyBuffer().writeString(messageBody);
+			if(producer == null)
+				log.info("ERRORRRRRRR");
 			producer.send(msg);
 		} catch (Exception e) {
 			e.printStackTrace();

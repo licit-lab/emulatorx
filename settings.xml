@@ -28,6 +28,6 @@
     </Link>
     <Files>
     	<links>final_links.csv</links>
-    	<observations>final_all_observations.csv</observations>
+    	<observations>6-6.csv</observations>
     </Files>
 </settings>
