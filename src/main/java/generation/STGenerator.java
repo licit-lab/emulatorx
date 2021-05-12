@@ -57,9 +57,9 @@ public class STGenerator extends Generator {
 			Thread.sleep(fmillisDiff);
 			log.info("Sending final placeholder");
 			sendPlaceHolder();
-			log.info("Waiting 10 seconds to give time for the last aggregated packets to be sent by the area nodes"
+			log.info("Waiting 50 seconds to give time for the last aggregated packets to be sent by the area nodes"
 					+ " to the remote broker...");
-			Thread.sleep(10000);
+			Thread.sleep(50000);
 
 
 		} catch (IOException e) {
