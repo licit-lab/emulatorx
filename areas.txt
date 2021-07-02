@@ -1,7 +1,14 @@
-Albigny-sur-Saône
-Alix
-Ambérieux
-Ambérieux-en-Dombes
+Start time 00:00 current interval end 03:00
+A;1;1:10
+A;2;1:20
+B;3;2:20
+C;4;2:40
+A;true
+B;6;3:10
+
+
+
+
 Ampuis
 Anse
 Anthon
