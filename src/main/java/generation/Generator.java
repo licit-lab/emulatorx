@@ -56,7 +56,7 @@ public class Generator extends Thread {
 		try {
 			producer = session.createProducer(queue);
 			ClientMessage message = session.createMessage(true);
-			message.putLongProperty("linkid", Long.parseLong(r.get(1)));
+			message.putStringProperty("linkid", r.get(1));
 			message.putFloatProperty("coverage", Float.parseFloat(r.get(2).replace(',','.')));
 			message.putStringProperty("timestamp", r.get(3));
 			message.putFloatProperty("speed", Float.parseFloat(r.get(4)));

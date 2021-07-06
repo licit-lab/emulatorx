@@ -1,6 +1,5 @@
 package link;
 
-import data.util.PacketGenerator;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class Link {
-	protected long linkId,from,to;
+	protected long from,to;
+	protected String linkId;
 	protected float length;
 	protected int ffs,speedlimit;
 	protected String areaname,name,coordinates;
@@ -30,7 +30,7 @@ public class Link {
 
 	private static final Logger log = LoggerFactory.getLogger(Link.class);
 
-	public Link(long id, float length, int ffs, int speedlimit, long from, long to,
+	public Link(String id, float length, int ffs, int speedlimit, long from, long to,
 				String areaname, String name, String coordinates, int intervallo, String startDateTime) {
 		this.linkId = id;
 		this.length = length;
@@ -70,16 +70,6 @@ public class Link {
 		this.endDateTime = this.startDateTime.plusMinutes(intervallo).minusSeconds(1);
 	}
 
-	private void setGeomFromString(String s) {
-		String[] l = s.split("\\|");
-		geom = new float[l.length][2];
-		for (int i = 0; i < l.length; i++) {
-			String[] n = l[i].split(",");
-			for (int j = 0; j < n.length; j++)
-				geom[i][j] = Float.parseFloat(n[j]);
-		}
-	}
-
 
 	protected void resetAggregateTotalVehiclesTravelTime(){
 		numVehicles = 0;
@@ -92,7 +82,7 @@ public class Link {
 			log.info("The speed reading is outside the interval upper bounds. Creating the packet and resetting the counters...");
 			log.info("Number of vehicles transited is {}", numVehicles);
 			log.info("Total travel time amounts to {}", totalTravelTime);
-			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimeSample(getId(),totalTravelTime,numVehicles, startDateTime, endDateTime);
+//			totalVehiclesTravelTime = PacketGenerator.totalVehiclesTravelTimeSample(getId(),totalTravelTime,numVehicles, startDateTime, endDateTime);
 			totalSampleSpeeds = 0;
 			numVehicles = 0;
 			totalTravelTime = 0;
@@ -142,8 +132,20 @@ public class Link {
 		return dateFormat.format(c.getTime());
 	}
 
-	public long getId() {
+	public String getId() {
 		return linkId;
+	}
+
+	public String getAreaname(){
+		return areaname;
+	}
+
+	public int getNumVehicles(){
+		return numVehicles;
+	}
+
+	public long getAggPeriod(){
+		return (intervallo*60)-1; //from minutes to seconds
 	}
 
 	/*public String generateCompleteJsonBody(double avgSpeed, double avgTravelTime, String timestamp) {

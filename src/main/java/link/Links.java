@@ -3,21 +3,21 @@ package link;
 import java.util.HashMap;
 
 public class Links {
-	private HashMap<Long, Link> links;
+	private HashMap<String, Link> links;
 
 	public Links() {
 		this.links = new HashMap<>();
 	}
 
-	public Links(HashMap<Long, Link> links) {
+	public Links(HashMap<String, Link> links) {
 		this.links = links;
 	}
 
-	public HashMap<Long, Link> getLinks() {
+	public HashMap<String, Link> getLinks() {
 		return links;
 	}
 
-	public void setLinks(HashMap<Long, Link> links) {
+	public void setLinks(HashMap<String, Link> links) {
 		this.links = links;
 	}
 
@@ -25,7 +25,7 @@ public class Links {
 		this.links.put(link.getId(),link);
 	}
 
-	public Link getLink(long linkId){
+	public Link getLink(String linkId){
 		return this.links.get(linkId);
 	}
 }

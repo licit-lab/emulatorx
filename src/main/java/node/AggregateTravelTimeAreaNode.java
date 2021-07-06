@@ -14,22 +14,16 @@ public abstract class AggregateTravelTimeAreaNode {
 	private static final Logger log = LoggerFactory.getLogger(AggregateTravelTimeAreaNode.class);
 	protected String areaName;
 	protected ClientConsumer consumer;
-	protected ClientSession sessionOut;
-	protected ClientProducer producer;
 	protected MessageHandler handler;
-	protected boolean multipleNorthboundQueues;
 	protected String urlIn;
-	protected String urlOut;
 	protected Links links;
 	protected int scala;
 	protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-	public AggregateTravelTimeAreaNode(String urlIn, String urlOut, String areaName, boolean multipleQueues, int scala) {
+	public AggregateTravelTimeAreaNode(String urlIn, String areaName, int scala) {
 		this.areaName = areaName;
 		this.urlIn = urlIn;
-		this.urlOut = urlOut;
 		this.links = new Links();
-		this.multipleNorthboundQueues = multipleQueues;
 		this.scala = scala;
 		createConsumer();
 		setHandler(createMessageHandler());

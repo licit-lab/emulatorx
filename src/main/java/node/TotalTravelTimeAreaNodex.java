@@ -18,7 +18,7 @@ public class TotalTravelTimeAreaNodex extends AreaNodex {
 		return msg -> {
 			try {
 				log.info("A new speed reading is about to be processed... ");
-				long linkProperty = msg.getLongProperty("linkid");
+				String linkProperty = msg.getStringProperty("linkid");
 				log.info("The link is the following {}", linkProperty);
 				Link link = super.links.getLink(linkProperty);
 				log.info("The speed reading refers to link {}", linkProperty);
@@ -35,5 +35,4 @@ public class TotalTravelTimeAreaNodex extends AreaNodex {
 			}
 		};
 	}
-
 }

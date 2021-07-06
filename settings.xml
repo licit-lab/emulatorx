@@ -27,7 +27,7 @@
     	<!-- 0 = false, 1 = true -->
     </Link>
     <Files>
-    	<links>final_links.csv</links>
-    	<observations>6-6.csv</observations>
+    	<links>final_links_updated.csv</links>
+    	<observations>final_all_observations.csv</observations>
     </Files>
 </settings>

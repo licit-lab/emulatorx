@@ -15,3 +15,4 @@ all_areas.txt
 areas.txt
 *.py
 *.json
+src/main/java/test/Main.java

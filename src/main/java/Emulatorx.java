@@ -1,8 +1,6 @@
 import generation.Generator;
-import generation.RTGenerator;
 import generation.STGenerator;
 import link.Link;
-import link.RTLink;
 import link.STLink;
 import node.*;
 import org.apache.commons.csv.CSVFormat;
@@ -68,10 +66,6 @@ public class Emulatorx {
 		String type = st.readElementFromFileXml("settings.xml","emulator","type");
 
 		switch (type){
-			case "RT":
-				log.info("RT solution will be executed...");
-				handleRT(linkFilePath,interval,startDateTime,urlIn,urlOut,boolMultipleNorthboundQueues,scala,obsFilePath);
-				break;
 			case "ST":
 				log.info("ST solution will be executed...");
 				handleST(linkFilePath,interval,startDateTime,urlIn,urlOut,boolMultipleNorthboundQueues,scala,obsFilePath);
@@ -81,51 +75,6 @@ public class Emulatorx {
 		}
 	}
 
-	private static void handleRT(String linkFilePath,String interval,String startDateTime,String urlIn,String urlOut,
-								 boolean boolMultipleNorthboundQueues, int scala,String obsFilePath){
-		HashMap<String,RTAggregateTravelTimeAreaNode> areas = new HashMap<>(); //It maintains associations between area name and area node
-		HashMap<String,String> associations = new HashMap<>(); //It maintains associations between link and its area name
-		Reader reader;
-		try {
-			reader = Files.newBufferedReader(Paths.get(linkFilePath));
-			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(',');
-			CSVParser csvParser = csvFormat.parse(reader);
-			for (CSVRecord r: csvParser){
-				//Creating area node and associating links
-				RTAggregateTravelTimeAreaNode an;
-				Link link = new RTLink(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length_y")),
-						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")),
-						Long.parseLong(r.get("from")),Long.parseLong(r.get("to")),
-						r.get("areaname"),r.get("name"),
-						r.get("coordinates"),
-						Integer.parseInt(interval),
-						startDateTime);
-
-				if(areas.containsKey(r.get("areaname")))
-					areas.get(r.get("areaname")).addLink(link);
-				else {
-					an = new RTAggregateTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues,scala);
-					an.addLink(link);
-					areas.put(r.get("areaname"), an);
-				}
-				//Create associations link -> areaNode
-				associations.put(r.get("id"),r.get("areaname"));
-				log.info("Link {} is associated to {}", r.get("id"),r.get("areaname"));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//Creating the producer to remote broker
-		log.info("Creating the producers...");
-		Set<String> areaNames = areas.keySet();
-		for(String a: areaNames)
-			areas.get(a).createProducer();
-
-		//Then follows the generator
-		Generator gx = new RTGenerator(obsFilePath,associations,urlIn,scala,startDateTime,Integer.parseInt(interval),areaNames);
-		gx.start();
-	}
-
 	private static void handleST(String linkFilePath,String interval,String startDateTime,String urlIn,String urlOut,
 								 boolean boolMultipleNorthboundQueues, int scala,String obsFilePath){
 		HashMap<String,STAggregateTravelTimeAreaNode> areas = new HashMap<>(); //It maintains associations between area name and area node
@@ -133,29 +82,29 @@ public class Emulatorx {
 		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get(linkFilePath));
-			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(',');
+			CSVFormat csvFormat = CSVFormat.DEFAULT.withFirstRecordAsHeader().withDelimiter(';');
 			CSVParser csvParser = csvFormat.parse(reader);
 			for (CSVRecord r: csvParser){
 				//Creating area node and associating links
 				STAggregateTravelTimeAreaNode an = null;
-				Link link = new STLink(Long.parseLong(r.get("id")), Float.parseFloat(r.get("length_y")),
+				Link link = new STLink(r.get("id"), Float.parseFloat(r.get("length")),
 						Integer.parseInt(r.get("ffs")), Integer.parseInt(r.get("speedlimit")),
 						Long.parseLong(r.get("from")),Long.parseLong(r.get("to")),
-						r.get("areaname"),r.get("name"),
-						r.get("coordinates"),
+						r.get("NOM_COM"),r.get("name"),
+						r.get("geometry"),
 						Integer.parseInt(interval),
 						startDateTime);
 
-				if(areas.containsKey(r.get("areaname")))
-					areas.get(r.get("areaname")).addLink(link);
+				if(areas.containsKey(r.get("NOM_COM")))
+					areas.get(r.get("NOM_COM")).addLink(link);
 				else {
-					an = new STAggregateTravelTimeAreaNode(urlIn, urlOut, r.get("areaname"), boolMultipleNorthboundQueues,scala);
+					an = new STAggregateTravelTimeAreaNode(urlIn,r.get("NOM_COM"),scala);
 					an.addLink(link);
-					areas.put(r.get("areaname"), an);
+					areas.put(r.get("NOM_COM"), an);
 				}
 				//Create associations link -> areaNode
-				associations.put(r.get("id"),r.get("areaname"));
-				log.info("Link {} is associated to {}", r.get("id"),r.get("areaname"));
+				associations.put(r.get("id"),r.get("NOM_COM"));
+				log.info("Link {} is associated to {}", r.get("id"),r.get("NOM_COM"));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -163,8 +112,6 @@ public class Emulatorx {
 		//Creating the producer to remote broker
 		log.info("Creating the producers...");
 		Set<String> areaNames = areas.keySet();
-		for(String a: areaNames)
-			areas.get(a).createProducer();
 
 		//Then follows the generator
 		Generator gx = new STGenerator(obsFilePath,associations,urlIn,scala,startDateTime,Integer.parseInt(interval),areaNames);
