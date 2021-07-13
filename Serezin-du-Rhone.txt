@@ -1,0 +1,7 @@
+0
+5
+{"avgTravelTime":2.5545245811587476,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031918,"linkid":"12500009334924","areaName":"Serezin-du-Rhone"}
+{"avgTravelTime":1.13931149342021,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031919,"linkid":"12500009334921","areaName":"Serezin-du-Rhone"}
+{"avgTravelTime":15.145377337346313,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031921,"linkid":"12500009720502","areaName":"Serezin-du-Rhone"}
+{"avgTravelTime":15.208818879674695,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031922,"linkid":"12500009757735","areaName":"Serezin-du-Rhone"}
+{"avgTravelTime":6.420983786661116,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031923,"linkid":"12500009710542","areaName":"Serezin-du-Rhone"}

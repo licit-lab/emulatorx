@@ -1,0 +1,8 @@
+5
+{"avgTravelTime":20.152007997726386,"sdTravelTime":3.9460490334603313,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020237,"linkid":"12500009717215","areaName":"Simandres"}
+{"avgTravelTime":12.61515824167352,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020239,"linkid":"12500009276513","areaName":"Simandres"}
+{"avgTravelTime":17.734034255455278,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020241,"linkid":"12500009764967","areaName":"Simandres"}
+{"avgTravelTime":32.30968990841428,"sdTravelTime":7.490622019009964,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020243,"linkid":"12500009426479","areaName":"Simandres"}
+{"avgTravelTime":0.5046206967584018,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020244,"linkid":"12500009135553","areaName":"Simandres"}
+1
+{"avgTravelTime":13.899648470491975,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032969,"linkid":"12500009764967","areaName":"Simandres"}

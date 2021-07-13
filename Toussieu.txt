@@ -1,0 +1,11 @@
+7
+{"avgTravelTime":5.813999748229981,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018831,"linkid":"12500009342471","areaName":"Toussieu"}
+{"avgTravelTime":14.253850680678639,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018836,"linkid":"12500009345746","areaName":"Toussieu"}
+{"avgTravelTime":10.003134897592906,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018837,"linkid":"12500009793836","areaName":"Toussieu"}
+{"avgTravelTime":9.761838015994512,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018838,"linkid":"12500009509873","areaName":"Toussieu"}
+{"avgTravelTime":10.697250366210936,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018838,"linkid":"12500009439897","areaName":"Toussieu"}
+{"avgTravelTime":3.1972500801086428,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018839,"linkid":"12500009616873","areaName":"Toussieu"}
+{"avgTravelTime":3.1972500801086428,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018840,"linkid":"12500009134045","areaName":"Toussieu"}
+2
+{"avgTravelTime":55.235198974609375,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031841,"linkid":"-12500009509872","areaName":"Toussieu"}
+{"avgTravelTime":56.17694091796875,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031842,"linkid":"-12500009345746","areaName":"Toussieu"}

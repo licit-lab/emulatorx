@@ -1,0 +1,5 @@
+2
+{"avgTravelTime":21.38679325498384,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020089,"linkid":"12500009655881","areaName":"Craponne"}
+{"avgTravelTime":6.286064640168221,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020092,"linkid":"12500009422690","areaName":"Craponne"}
+1
+{"avgTravelTime":6.668999862670899,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032823,"linkid":"12500009655881","areaName":"Craponne"}

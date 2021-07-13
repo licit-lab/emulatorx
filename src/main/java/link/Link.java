@@ -145,7 +145,7 @@ public class Link {
 	}
 
 	public long getAggPeriod(){
-		return (intervallo*60)-1; //from minutes to seconds
+		return ((intervallo*60)-1)*1000; //from minutes to milliseconds
 	}
 
 	/*public String generateCompleteJsonBody(double avgSpeed, double avgTravelTime, String timestamp) {

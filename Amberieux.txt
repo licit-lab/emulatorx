@@ -1,0 +1,5 @@
+0
+3
+{"avgTravelTime":1.115199966430664,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032387,"linkid":"-12500009878316","areaName":"Amberieux"}
+{"avgTravelTime":7.735550783993153,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032387,"linkid":"-12500009911572","areaName":"Amberieux"}
+{"avgTravelTime":1.0423999786376952,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032388,"linkid":"-12500009213309","areaName":"Amberieux"}

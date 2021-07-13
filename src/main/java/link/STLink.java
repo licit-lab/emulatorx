@@ -33,12 +33,12 @@ public class STLink extends Link {
 			log.info("Number of vehicles transited is {}", numVehicles);
 			double avgTravelTime = stats.getMean();
 			double sdTravelTime = stats.getStandardDeviation();;
-			LocalDateTime aggregationDateTime = startDateTime.plusMinutes(intervallo).minusSeconds(1);
+			LocalDateTime aggregationDateTime = endDateTime.minusSeconds(1);
 			Instant instant = aggregationDateTime.atZone(ZoneId.systemDefault()).toInstant();
-			long aggTimestamp = instant.toEpochMilli();
+			long domainAggTimestamp = instant.toEpochMilli();
 			aggregateVehiclesTravelTime = PacketGenerator.aggregateVehiclesTravelTimeSample(getId(), getAreaname(),
 					avgTravelTime, sdTravelTime, numVehicles,
-					getAggPeriod(), startDateTime.format(formatter), aggTimestamp);
+					getAggPeriod(),domainAggTimestamp);
 			resetAggregateTotalVehiclesTravelTime();
 		}
 		/*long diff = Math.abs(Duration.between(currentDate,finalDate).toMinutes());

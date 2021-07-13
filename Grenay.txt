@@ -1,0 +1,7 @@
+1
+{"avgTravelTime":21.128807018649194,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020219,"linkid":"-12500009462172","areaName":"Grenay"}
+4
+{"avgTravelTime":3.0051290942776587,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032943,"linkid":"-12500009462173","areaName":"Grenay"}
+{"avgTravelTime":13.904419142200101,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032945,"linkid":"-12500009462170","areaName":"Grenay"}
+{"avgTravelTime":34.896084530703675,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032946,"linkid":"-12500009324202","areaName":"Grenay"}
+{"avgTravelTime":1.5889354705810546,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032947,"linkid":"-12500009462168","areaName":"Grenay"}

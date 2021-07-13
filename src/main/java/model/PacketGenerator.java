@@ -6,10 +6,9 @@ public class PacketGenerator {
     public static String aggregateVehiclesTravelTimeSample(String linkid, String areaName, double avgTravelTime, double sdTravelTime,
                                                            int numVehicles,
                                                            long aggPeriod,
-                                                           String startDateTime,
-                                                           long aggTimestamp) {
+                                                           long domainAggTimestamp) {
         AggregateVehiclesTravelTimeSample sample = new AggregateVehiclesTravelTimeSample(linkid,areaName,avgTravelTime,sdTravelTime,
-                numVehicles,aggPeriod,startDateTime,aggTimestamp);
+                numVehicles,aggPeriod,domainAggTimestamp);
         return new Gson().toJson(sample);
     }
 }

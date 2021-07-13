@@ -1,0 +1,11 @@
+7
+{"avgTravelTime":0.15587628158097414,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019709,"linkid":"-12500009365986","areaName":"Tassin-la-Demi-Lune"}
+{"avgTravelTime":0.25496906791765667,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019712,"linkid":"12500009680673","areaName":"Tassin-la-Demi-Lune"}
+{"avgTravelTime":1.2457894375449732,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019712,"linkid":"12500009129014","areaName":"Tassin-la-Demi-Lune"}
+{"avgTravelTime":1.0068865667913378,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019714,"linkid":"12500009564729","areaName":"Tassin-la-Demi-Lune"}
+{"avgTravelTime":0.567000012648733,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019715,"linkid":"12500009211485","areaName":"Tassin-la-Demi-Lune"}
+{"avgTravelTime":0.1877938123093438,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019716,"linkid":"12500009211482","areaName":"Tassin-la-Demi-Lune"}
+{"avgTravelTime":1.5963158256129215,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019717,"linkid":"12500009211484","areaName":"Tassin-la-Demi-Lune"}
+2
+{"avgTravelTime":0.13999999364217125,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032453,"linkid":"-12500009365986","areaName":"Tassin-la-Demi-Lune"}
+{"avgTravelTime":0.6511199951171875,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032455,"linkid":"12500009564729","areaName":"Tassin-la-Demi-Lune"}

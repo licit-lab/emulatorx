@@ -1,0 +1,9 @@
+0
+7
+{"avgTravelTime":0.9700851034610829,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032261,"linkid":"12500009896479","areaName":"Villette-d_Anthon"}
+{"avgTravelTime":55.760140666555856,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032264,"linkid":"-12500009888698","areaName":"Villette-d_Anthon"}
+{"avgTravelTime":0.6928085164820894,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032270,"linkid":"12500009475184","areaName":"Villette-d_Anthon"}
+{"avgTravelTime":2.4081702536724983,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032272,"linkid":"12500010123872","areaName":"Villette-d_Anthon"}
+{"avgTravelTime":2.697319160623753,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032274,"linkid":"12500010050036","areaName":"Villette-d_Anthon"}
+{"avgTravelTime":4.612595838181516,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032274,"linkid":"-12500009716605","areaName":"Villette-d_Anthon"}
+{"avgTravelTime":1.4970638356310257,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032275,"linkid":"12500009987503","areaName":"Villette-d_Anthon"}

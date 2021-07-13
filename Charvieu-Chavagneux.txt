@@ -1,0 +1,6 @@
+0
+4
+{"avgTravelTime":4.210875034332276,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032025,"linkid":"12500009204984","areaName":"Charvieu-Chavagneux"}
+{"avgTravelTime":2.3132571193150113,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032026,"linkid":"12500009204986","areaName":"Charvieu-Chavagneux"}
+{"avgTravelTime":0.8129871855390833,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032029,"linkid":"12500010078652","areaName":"Charvieu-Chavagneux"}
+{"avgTravelTime":9.393702080909243,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032037,"linkid":"12500009447169","areaName":"Charvieu-Chavagneux"}

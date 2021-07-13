@@ -1,0 +1,11 @@
+0
+8
+{"avgTravelTime":0.6879207648853265,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031419,"linkid":"12500009680679","areaName":"Champagne-au-Mont-d_Or"}
+{"avgTravelTime":14.206091308593749,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031420,"linkid":"12500009715600","areaName":"Champagne-au-Mont-d_Or"}
+{"avgTravelTime":11.171858771829044,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031420,"linkid":"12500009511825","areaName":"Champagne-au-Mont-d_Or"}
+{"avgTravelTime":21.45600078318379,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031420,"linkid":"12500009511829","areaName":"Champagne-au-Mont-d_Or"}
+{"avgTravelTime":2.5752475247524753,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031421,"linkid":"12500009511828","areaName":"Champagne-au-Mont-d_Or"}
+{"avgTravelTime":11.943209200127182,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031421,"linkid":"12500009511827","areaName":"Champagne-au-Mont-d_Or"}
+{"avgTravelTime":3.031623606962316,"sdTravelTime":0.0,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031421,"linkid":"12500009511826","areaName":"Champagne-au-Mont-d_Or"}
+{"avgTravelTime":11.383841758199257,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031424,"linkid":"12500009680680","areaName":"Champagne-au-Mont-d_Or"}
+0

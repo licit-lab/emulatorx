@@ -1,0 +1,12 @@
+0
+10
+{"avgTravelTime":0.8314838532478579,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032697,"linkid":"-12500009376880","areaName":"Genas"}
+{"avgTravelTime":1.7549999509538923,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032700,"linkid":"12500009800713","areaName":"Genas"}
+{"avgTravelTime":5.801399917602539,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032704,"linkid":"12500010078540","areaName":"Genas"}
+{"avgTravelTime":14.790857260567803,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032705,"linkid":"-12500009879774","areaName":"Genas"}
+{"avgTravelTime":7.552799835205079,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032706,"linkid":"12500009095688","areaName":"Genas"}
+{"avgTravelTime":12.0375,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032706,"linkid":"12500009833847","areaName":"Genas"}
+{"avgTravelTime":27.265335205078124,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032708,"linkid":"-12500009162844","areaName":"Genas"}
+{"avgTravelTime":0.8086829301787586,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032710,"linkid":"-12500009286548","areaName":"Genas"}
+{"avgTravelTime":18.98849945068359,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032714,"linkid":"12500009570058","areaName":"Genas"}
+{"avgTravelTime":3.5740001678466795,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032718,"linkid":"12500009760973","areaName":"Genas"}

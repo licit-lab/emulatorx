@@ -6,22 +6,37 @@ public class AggregateVehiclesTravelTimeSample{
 	private double avgTravelTime;
 	private double sdTravelTime;
 	private  int numVehicles;
-	private long aggPeriod, aggTimestamp;
-	private String startDateTime, linkid, areaName;
+	private long aggPeriod, domainAggTimestamp, aggTimestamp;
+	private String linkid, areaName;
 
 	public AggregateVehiclesTravelTimeSample(String linkid, String areaName, double avgTravelTime, double sdTravelTime,
                                              int numVehicles,
                                              long aggPeriod,
-                                             String startDateTime,
-                                             long aggTimestamp){
+                                             long domainAggTimestamp){
 		this.avgTravelTime = avgTravelTime;
 		this.sdTravelTime = sdTravelTime;
 		this.numVehicles = numVehicles;
 		this.aggPeriod = aggPeriod;
 		this.linkid = linkid;
-		this.startDateTime = startDateTime;
-		this.aggTimestamp = aggTimestamp;
+		this.domainAggTimestamp = domainAggTimestamp;
+		this.aggTimestamp = System.currentTimeMillis();
 		this.areaName = areaName;
+	}
+
+	public long getAggTimestamp() {
+		return aggTimestamp;
+	}
+
+	public long getDomainAggTimestamp() {
+		return domainAggTimestamp;
+	}
+
+	public void setDomainAggTimestamp(long domainAggTimestamp) {
+		this.domainAggTimestamp = domainAggTimestamp;
+	}
+
+	public void setAggTimestamp(long aggTimestamp) {
+		this.aggTimestamp = aggTimestamp;
 	}
 
 	public long getAggPeriod() {
@@ -30,22 +45,6 @@ public class AggregateVehiclesTravelTimeSample{
 
 	public void setAggPeriod(long aggPeriod) {
 		this.aggPeriod = aggPeriod;
-	}
-
-	public long getAggTimestamp() {
-		return aggTimestamp;
-	}
-
-	public void setAggTimestamp(long aggTimestamp) {
-		this.aggTimestamp = aggTimestamp;
-	}
-
-	public String getStartDateTime() {
-		return startDateTime;
-	}
-
-	public void setStartDateTime(String startDateTime) {
-		this.startDateTime = startDateTime;
 	}
 
 	public String getLinkid() {

@@ -1,14 +1,14 @@
 package node;
 
+import com.google.gson.Gson;
 import link.STLink;
+import model.AggregateVehiclesTravelTimeSample;
 import org.apache.activemq.artemis.api.core.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -22,7 +22,7 @@ public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNode {
 	public STAggregateTravelTimeAreaNode(String urlIn, String areaName,int scala)
 			throws IOException {
 		super(urlIn, areaName,scala);
-		String fileName = areaName+".csv";
+		String fileName = areaName+".txt";
 		writer = Files.newBufferedWriter(Paths.get(fileName));
 	}
 
@@ -47,6 +47,11 @@ public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNode {
 						STLink link = (STLink) super.links.getLinks().get(l);
 						String line = link.getAggregateTotalVehiclesTravelTime();
 						if(line != null){
+//							System.out.println(line);
+//							Gson g = new Gson();
+//							AggregateVehiclesTravelTimeSample s = g.fromJson(line, AggregateVehiclesTravelTimeSample.class);
+//							s.setAggTimestamp(System.currentTimeMillis());
+//							System.out.println(new Gson().toJson(s));
 							writer.write(line);
 							writer.newLine();
 						}
@@ -70,12 +75,5 @@ public class STAggregateTravelTimeAreaNode extends AggregateTravelTimeAreaNode {
 				e.printStackTrace();
 			}
 		};
-	}
-
-
-	public void writeLine(STLink l) throws IOException {
-		if(l.getNumVehicles() > 0){
-			System.out.println(l.getId());
-		}
 	}
 }

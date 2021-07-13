@@ -1,0 +1,13 @@
+11
+{"avgTravelTime":2.879246089143573,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018781,"linkid":"12500009197570","areaName":"L_Arbresle"}
+{"avgTravelTime":1.9412999725341797,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018785,"linkid":"-12500009487328","areaName":"L_Arbresle"}
+{"avgTravelTime":0.975130437768024,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018787,"linkid":"12500009775312","areaName":"L_Arbresle"}
+{"avgTravelTime":0.5462608710579251,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018789,"linkid":"12500009820121","areaName":"L_Arbresle"}
+{"avgTravelTime":4.979000091552734,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018791,"linkid":"12500009102305","areaName":"L_Arbresle"}
+{"avgTravelTime":12.012856619698661,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018794,"linkid":"-12500009099553","areaName":"L_Arbresle"}
+{"avgTravelTime":14.858571951729912,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018795,"linkid":"-12500009381025","areaName":"L_Arbresle"}
+{"avgTravelTime":0.8809811502132775,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018798,"linkid":"-12500009266853","areaName":"L_Arbresle"}
+{"avgTravelTime":2.319300041198731,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018803,"linkid":"-12500009516369","areaName":"L_Arbresle"}
+{"avgTravelTime":0.3825,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018805,"linkid":"-12500009516371","areaName":"L_Arbresle"}
+{"avgTravelTime":1.6731000137329104,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018806,"linkid":"-12500009516370","areaName":"L_Arbresle"}
+0

@@ -1,0 +1,8 @@
+1
+{"avgTravelTime":3.4644704866810003,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018075,"linkid":"-12500010072174","areaName":"Saint-Cyr-sur-le-Rhone"}
+2
+{"avgTravelTime":1.755599994659424,"sdTravelTime":0.35468476036421304,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031453,"linkid":"-12500009572240","areaName":"Saint-Cyr-sur-le-Rhone"}
+{"avgTravelTime":4.580799865722656,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031453,"linkid":"-12500010072174","areaName":"Saint-Cyr-sur-le-Rhone"}
+2
+{"avgTravelTime":1.8511985032222922,"sdTravelTime":0.31733212483657447,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185338000,"aggTimestamp":1626179044423,"linkid":"-12500009572240","areaName":"Saint-Cyr-sur-le-Rhone"}
+{"avgTravelTime":4.226460267535349,"sdTravelTime":0.7244990825672127,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185338000,"aggTimestamp":1626179044424,"linkid":"-12500010072174","areaName":"Saint-Cyr-sur-le-Rhone"}

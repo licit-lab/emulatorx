@@ -1,0 +1,8 @@
+0
+6
+{"avgTravelTime":4.990425221512957,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033020,"linkid":"12500009467771","areaName":"Beligneux"}
+{"avgTravelTime":41.40348372920867,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033020,"linkid":"12500009467772","areaName":"Beligneux"}
+{"avgTravelTime":6.044516040432838,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033021,"linkid":"12500009467775","areaName":"Beligneux"}
+{"avgTravelTime":26.99970939390121,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033021,"linkid":"12500009467776","areaName":"Beligneux"}
+{"avgTravelTime":36.86632158833166,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033021,"linkid":"12500009467777","areaName":"Beligneux"}
+{"avgTravelTime":8.67774175828503,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033022,"linkid":"12500009443486","areaName":"Beligneux"}

@@ -1,0 +1,8 @@
+2
+{"avgTravelTime":3.8492998123168944,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019908,"linkid":"12500009543960","areaName":"Massieux"}
+{"avgTravelTime":62.55600128173828,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019910,"linkid":"-12500009562888","areaName":"Massieux"}
+4
+{"avgTravelTime":29.353091708096592,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032619,"linkid":"-12500009294838","areaName":"Massieux"}
+{"avgTravelTime":74.52000000000001,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032620,"linkid":"-12500009491578","areaName":"Massieux"}
+{"avgTravelTime":5.525999879837037,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032620,"linkid":"-12500010103792","areaName":"Massieux"}
+{"avgTravelTime":80.72100219726562,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032622,"linkid":"12500009294838","areaName":"Massieux"}

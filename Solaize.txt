@@ -1,0 +1,5 @@
+2
+{"avgTravelTime":24.412165870351238,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019326,"linkid":"12500009186889","areaName":"Solaize"}
+{"avgTravelTime":0.4116525508155508,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179019327,"linkid":"12500009186890","areaName":"Solaize"}
+1
+{"avgTravelTime":1.4211207155321464,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032107,"linkid":"12500009821225","areaName":"Solaize"}

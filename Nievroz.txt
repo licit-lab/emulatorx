@@ -1,0 +1,7 @@
+0
+5
+{"avgTravelTime":6.39,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032804,"linkid":"-12500010077585","areaName":"Nievroz"}
+{"avgTravelTime":4.4885852720679305,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032804,"linkid":"-12500009921462","areaName":"Nievroz"}
+{"avgTravelTime":4.497818131880327,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032805,"linkid":"-12500010151792","areaName":"Nievroz"}
+{"avgTravelTime":6.110341141863568,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032806,"linkid":"-12500009178431","areaName":"Nievroz"}
+{"avgTravelTime":0.944000015258789,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032806,"linkid":"12500009904154","areaName":"Nievroz"}

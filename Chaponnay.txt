@@ -1,0 +1,4 @@
+0
+2
+{"avgTravelTime":17.75420545212766,"sdTravelTime":0.5230882945741073,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033203,"linkid":"12500010007744","areaName":"Chaponnay"}
+{"avgTravelTime":21.603354913074398,"sdTravelTime":0.47489778514242204,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033206,"linkid":"12500009456155","areaName":"Chaponnay"}
