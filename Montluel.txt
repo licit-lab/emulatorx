@@ -1,8 +1,0 @@
-0
-2
-{"avgTravelTime":2.8781869792252137,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031472,"linkid":"12500009218734","areaName":"Montluel"}
-{"avgTravelTime":2.6197122697349937,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031475,"linkid":"12500009920333","areaName":"Montluel"}
-3
-{"avgTravelTime":2.9549031903666836,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185338000,"aggTimestamp":1626179044448,"linkid":"-12500009467793","areaName":"Montluel"}
-{"avgTravelTime":2.4541966672803532,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185338000,"aggTimestamp":1626179044449,"linkid":"-12500009267740","areaName":"Montluel"}
-{"avgTravelTime":1.0847999954223633,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185338000,"aggTimestamp":1626179044453,"linkid":"-12500009277351","areaName":"Montluel"}

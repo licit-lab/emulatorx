@@ -1,9 +1,0 @@
-0
-7
-{"avgTravelTime":12.536356789725168,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031856,"linkid":"12500009490593","areaName":"Ternay"}
-{"avgTravelTime":5.033892876761301,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031856,"linkid":"12500009459239","areaName":"Ternay"}
-{"avgTravelTime":44.86028529575893,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031857,"linkid":"12500009343688","areaName":"Ternay"}
-{"avgTravelTime":42.93435412991431,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031857,"linkid":"12500009343690","areaName":"Ternay"}
-{"avgTravelTime":5.608607319423131,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031858,"linkid":"12500010044830","areaName":"Ternay"}
-{"avgTravelTime":0.3844285726547242,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031858,"linkid":"12500010104575","areaName":"Ternay"}
-{"avgTravelTime":10.69682170322963,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031859,"linkid":"12500010078700","areaName":"Ternay"}

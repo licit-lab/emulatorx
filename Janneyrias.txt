@@ -1,4 +1,0 @@
-0
-2
-{"avgTravelTime":37.44468017578125,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032723,"linkid":"12500009413252","areaName":"Janneyrias"}
-{"avgTravelTime":17.556494392316367,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032723,"linkid":"12500009413251","areaName":"Janneyrias"}

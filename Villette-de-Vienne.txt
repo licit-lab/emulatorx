@@ -1,9 +1,0 @@
-0
-7
-{"avgTravelTime":0.5709599876403809,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031700,"linkid":"-12500009987092","areaName":"Villette-de-Vienne"}
-{"avgTravelTime":29.831999860491074,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031702,"linkid":"-12500009900314","areaName":"Villette-de-Vienne"}
-{"avgTravelTime":2.061310288001751,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031703,"linkid":"-12500009740880","areaName":"Villette-de-Vienne"}
-{"avgTravelTime":3.3354285103934154,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031704,"linkid":"-12500010004683","areaName":"Villette-de-Vienne"}
-{"avgTravelTime":8.433428519112724,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031705,"linkid":"12500009377093","areaName":"Villette-de-Vienne"}
-{"avgTravelTime":1.3954286302839005,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031705,"linkid":"-12500010149418","areaName":"Villette-de-Vienne"}
-{"avgTravelTime":8.573039978027344,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031705,"linkid":"-12500010153081","areaName":"Villette-de-Vienne"}

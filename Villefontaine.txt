@@ -1,7 +1,0 @@
-0
-5
-{"avgTravelTime":1.155243208601668,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033010,"linkid":"12500009067226","areaName":"Villefontaine"}
-{"avgTravelTime":8.011459598025759,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033011,"linkid":"12500009292308","areaName":"Villefontaine"}
-{"avgTravelTime":1.0689729432801942,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033011,"linkid":"12500009295005","areaName":"Villefontaine"}
-{"avgTravelTime":9.54356788429054,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033014,"linkid":"12500009741786","areaName":"Villefontaine"}
-{"avgTravelTime":2.142162261138091,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179033014,"linkid":"12500009282317","areaName":"Villefontaine"}

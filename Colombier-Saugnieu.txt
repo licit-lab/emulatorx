@@ -1,9 +1,0 @@
-0
-7
-{"avgTravelTime":2.425005125999451,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032855,"linkid":"12500009603306","areaName":"Colombier-Saugnieu"}
-{"avgTravelTime":0.41062501072883606,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032856,"linkid":"12500009808283","areaName":"Colombier-Saugnieu"}
-{"avgTravelTime":0.9731249570846559,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032857,"linkid":"12500009695741","areaName":"Colombier-Saugnieu"}
-{"avgTravelTime":0.4241249978542328,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032858,"linkid":"12500009695740","areaName":"Colombier-Saugnieu"}
-{"avgTravelTime":2.112631506668894,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032859,"linkid":"12500009734585","areaName":"Colombier-Saugnieu"}
-{"avgTravelTime":7.49578387286212,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032861,"linkid":"-12500010117927","areaName":"Colombier-Saugnieu"}
-{"avgTravelTime":0.9530526713321084,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032863,"linkid":"12500009782353","areaName":"Colombier-Saugnieu"}

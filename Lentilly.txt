@@ -1,7 +1,0 @@
-0
-5
-{"avgTravelTime":2.229600067138672,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031747,"linkid":"-12500009294482","areaName":"Lentilly"}
-{"avgTravelTime":0.4297731930447608,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031749,"linkid":"-12500009294476","areaName":"Lentilly"}
-{"avgTravelTime":14.741672807173295,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031750,"linkid":"-12500009294478","areaName":"Lentilly"}
-{"avgTravelTime":5.8417499542236335,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031751,"linkid":"-12500009294479","areaName":"Lentilly"}
-{"avgTravelTime":3.868179664183199,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031752,"linkid":"-12500009839119","areaName":"Lentilly"}

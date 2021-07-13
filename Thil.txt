@@ -1,3 +1,0 @@
-0
-1
-{"avgTravelTime":27.237129543138586,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031817,"linkid":"-12500009330398","areaName":"Thil"}

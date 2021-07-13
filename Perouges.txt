@@ -1,4 +1,0 @@
-0
-2
-{"avgTravelTime":5.875609756097561,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032049,"linkid":"12500009467773","areaName":"Perouges"}
-{"avgTravelTime":0.6968780331495332,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032049,"linkid":"12500009467774","areaName":"Perouges"}

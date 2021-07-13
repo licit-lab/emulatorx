@@ -1,9 +1,0 @@
-0
-7
-{"avgTravelTime":2.7183673469387752,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032798,"linkid":"12500009617574","areaName":"Dagneux"}
-{"avgTravelTime":2.6750203969527266,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032799,"linkid":"12500009617573","areaName":"Dagneux"}
-{"avgTravelTime":6.544653195750957,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032799,"linkid":"12500009617572","areaName":"Dagneux"}
-{"avgTravelTime":3.6344000244140626,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032799,"linkid":"12500009617579","areaName":"Dagneux"}
-{"avgTravelTime":10.208967701981708,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032801,"linkid":"12500009109602","areaName":"Dagneux"}
-{"avgTravelTime":1.44852631217555,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032803,"linkid":"12500009439419","areaName":"Dagneux"}
-{"avgTravelTime":1.72472731850364,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032805,"linkid":"12500009939244","areaName":"Dagneux"}

@@ -1,3 +1,0 @@
-0
-1
-{"avgTravelTime":71.21080078125,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032102,"linkid":"12500009430391","areaName":"Lissieu"}

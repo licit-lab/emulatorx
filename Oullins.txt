@@ -1,7 +1,0 @@
-0
-5
-{"avgTravelTime":11.019870684223791,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032187,"linkid":"12500009957103","areaName":"Oullins"}
-{"avgTravelTime":2.055870991368448,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032188,"linkid":"12500009957104","areaName":"Oullins"}
-{"avgTravelTime":0.7412903078140751,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032189,"linkid":"12500009436133","areaName":"Oullins"}
-{"avgTravelTime":5.644645444808468,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032192,"linkid":"12500009916791","areaName":"Oullins"}
-{"avgTravelTime":1.0114838384812879,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032195,"linkid":"12500009475993","areaName":"Oullins"}

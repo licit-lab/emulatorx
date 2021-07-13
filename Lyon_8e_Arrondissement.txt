@@ -1,7 +1,0 @@
-0
-5
-{"avgTravelTime":0.41015731725799903,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032539,"linkid":"12500009853703","areaName":"Lyon_8e_Arrondissement"}
-{"avgTravelTime":3.907574701309204,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032540,"linkid":"12500009621660","areaName":"Lyon_8e_Arrondissement"}
-{"avgTravelTime":5.011826158606488,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032541,"linkid":"12500009853699","areaName":"Lyon_8e_Arrondissement"}
-{"avgTravelTime":5.000399780273439,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032544,"linkid":"12500009423998","areaName":"Lyon_8e_Arrondissement"}
-{"avgTravelTime":1.7259774540247546,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179032549,"linkid":"12500009634666","areaName":"Lyon_8e_Arrondissement"}

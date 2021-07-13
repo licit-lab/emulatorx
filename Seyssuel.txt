@@ -1,9 +1,0 @@
-2
-{"avgTravelTime":72.5016015625,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018484,"linkid":"-12500009462136","areaName":"Seyssuel"}
-{"avgTravelTime":3.0788000488281253,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018485,"linkid":"-12500009462135","areaName":"Seyssuel"}
-5
-{"avgTravelTime":20.62557318183813,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031591,"linkid":"-12500009319800","areaName":"Seyssuel"}
-{"avgTravelTime":14.080799997615403,"sdTravelTime":3.503258409149299,"numVehicles":2,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031592,"linkid":"-12500009319797","areaName":"Seyssuel"}
-{"avgTravelTime":0.6034090909090909,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031593,"linkid":"-12500009168260","areaName":"Seyssuel"}
-{"avgTravelTime":49.81026061545801,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031594,"linkid":"-12500009462136","areaName":"Seyssuel"}
-{"avgTravelTime":2.099181851473722,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031594,"linkid":"-12500009462135","areaName":"Seyssuel"}

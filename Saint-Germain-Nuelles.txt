@@ -1,6 +1,0 @@
-0
-4
-{"avgTravelTime":1.3883999633789064,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031652,"linkid":"-12500009685202","areaName":"Saint-Germain-Nuelles"}
-{"avgTravelTime":13.1443994140625,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031654,"linkid":"-12500009989916","areaName":"Saint-Germain-Nuelles"}
-{"avgTravelTime":5.902800292968751,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031655,"linkid":"-12500009989914","areaName":"Saint-Germain-Nuelles"}
-{"avgTravelTime":28.0156787109375,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536185158000,"aggTimestamp":1626179031655,"linkid":"-12500009757151","areaName":"Saint-Germain-Nuelles"}

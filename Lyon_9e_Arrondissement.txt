@@ -1,9 +1,0 @@
-7
-{"avgTravelTime":0.32138041232494596,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018921,"linkid":"12500009680669","areaName":"Lyon_9e_Arrondissement"}
-{"avgTravelTime":1.2098297930778341,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018923,"linkid":"12500009680672","areaName":"Lyon_9e_Arrondissement"}
-{"avgTravelTime":3.1205107668612864,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018923,"linkid":"12500009680670","areaName":"Lyon_9e_Arrondissement"}
-{"avgTravelTime":2.9680851063829787,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018925,"linkid":"12500009680671","areaName":"Lyon_9e_Arrondissement"}
-{"avgTravelTime":24.589174486243206,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018926,"linkid":"12500009365960","areaName":"Lyon_9e_Arrondissement"}
-{"avgTravelTime":8.10378956041838,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018926,"linkid":"12500009365961","areaName":"Lyon_9e_Arrondissement"}
-{"avgTravelTime":1.422382955348238,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179018927,"linkid":"12500009390937","areaName":"Lyon_9e_Arrondissement"}
-0

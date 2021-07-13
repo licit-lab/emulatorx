@@ -1,5 +1,0 @@
-3
-{"avgTravelTime":4.707178866152732,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020485,"linkid":"12500009364993","areaName":"Neyron"}
-{"avgTravelTime":9.542145462541392,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020486,"linkid":"-12500010147497","areaName":"Neyron"}
-{"avgTravelTime":7.2851127573985925,"sdTravelTime":0.0,"numVehicles":1,"aggPeriod":179000,"domainAggTimestamp":1536184978000,"aggTimestamp":1626179020487,"linkid":"12500009554219","areaName":"Neyron"}
-0
